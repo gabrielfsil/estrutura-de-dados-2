@@ -24,35 +24,19 @@ void trocaStr(Registro *registros, int index1, int index2)
 
 }
 
-int  totalDiario(Registro *registros, int *casosDia, int N){
 
-    string dataInicial = registros[0].getDataStr();
-    casosDia[0] = registros[0].getCasos();
-    int dias = 0;
+void totalDiario(Registro *registros, int N)
+{
 
-    for(int i =1; i<N; i++){
-        // cout << "dia = " << dias << endl;
-        // cout << "casos dia: " << casosDia[0] << endl;
-        // cout << "data inicial " << dataInicial << " == " << registros[i].getDataStr() << " ? "<< endl;
-        if(registros[i].getDataStr() == dataInicial)
-        {
-            // cout<< "sim, entao" << endl;
-            // cout << " casosDia[" <<dias << "]" << " += " << registros[i].getCasos() << endl;
-            casosDia[dias] += registros[i].getCasos();
-            // cout << "Casos dia [" << dias << "] = " << casosDia[dias] << endl ;
-            // cout << "" << endl;
-
-        }else{
-            // cout<< "nao, entao" << endl;
-            dias++;
-            casosDia[dias] = registros[i].getCasos();
-            // cout << "dataInicial" << " == " << registros[i].getDataStr() << endl;
-            // cout << "dia = " << dias << endl;
-            dataInicial = registros[i].getDataStr();
-            // cout << "" << endl;
-        }
+    for(int i = N-1 ; i >= 0; i--)
+    {
+        int j = i-1;
+        while((registros[i].getCidade() != registros[j].getCidade()) && j>=0)
+            j--;        
+        if(j>=0)
+            registros[i].setCasos(registros[i].getCasos() - registros[j].getCasos());   
     }
-    return dias+1;
+
 }
 
 //Ordenação pelo método de seleção onde a comparação leva 3 critérios, que são data, estado e cidade
@@ -123,7 +107,7 @@ void geraCSV(Registro *registros, int N)
 {
     ofstream arq("saida.csv");
 
-    arq << "date,state,name,code,cases,deaths" << endl;
+    arq << "Data,Estado,Nome,Codigo,Casos/Dia,Mortes" << endl;
 
     for(int i = 0; i <N; i++)
     {
@@ -184,7 +168,7 @@ void embaralhaObj(Registro *registro, int tamanho, int k)
 //Função para leitura do arquivo em função da quantidade N de registros desejados
 void leArquivoCsv(Registro *registros, int N)
 {
-    ifstream myfile("teste.csv");
+    ifstream myfile("teste2.csv");
     string line;
     vector<string> dados;
 
@@ -228,17 +212,9 @@ int main(){
     Registro *registros = new Registro[N];
     leArquivoCsv(registros, N);
     //imprimeInformacoes(registros,N);
-    SelectionSorting(registros, N);
-
-    // int * casosDia = new int [365];
-    // int dias = totalDiario(registros, casosDia, N);
-
-    // cout << "Total de casos por dia" << endl;
-    // for(int i=0; i < dias; i++)
-    // {
-    //     cout << "Dia " << i << " :" << casosDia[i] << " casos" << endl;
-    // }
-    imprimeInformacoes(registros,N);
+    SelectionSorting(registros, N);  
+    totalDiario(registros, N);
+    //imprimeInformacoes(registros,N);
     geraCSV(registros, N);
     system ("pause");
 
