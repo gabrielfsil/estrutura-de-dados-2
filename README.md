@@ -2,6 +2,14 @@
 
 Repositório usado para desenvolvimento do Trabalho Prático da disciplina DCC 012 - Estrutura de Dados 2
 
+## Executando
+
+Para executar o programa execute o seguinte código na pasta do repositório:
+
+```
+g++ *.cpp && ./a.out
+```
+
 ## GIT TUTORIAL
 ### Primeira configuração
 
