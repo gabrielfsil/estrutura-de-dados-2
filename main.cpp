@@ -170,8 +170,8 @@ int main(int argc, char *argv[]){
     //imprimeInformacoes(registros,N);
     ord->selectionSortPre(registros, N);  
     totalDiario(registros, N);
-    ord->selectionSort(registros, N);
-    //imprimeInformacoes(registros,N);
+    //ord->selectionSort(registros, N);
+    ord->mergeSort(registros,0,N);
     geraCSV(registros, N);
     system ("pause");
 

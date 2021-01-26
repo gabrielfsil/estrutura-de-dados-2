@@ -10,6 +10,8 @@ class Ordena{
         ~Ordena();
         void selectionSortPre(Registro *registros, int N);
         void selectionSort(Registro *vet, int N);
+        void mergeSort(Registro * vetor, int p,  int r);
+        void merge(Registro * vet, int p, int q, int r);
         int getNumTroca();
         int getNumComparacao();
     

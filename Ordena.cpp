@@ -16,6 +16,19 @@ Ordena::~Ordena()
 {
 }
 
+int Ordena::getNumComparacao()
+{
+
+    return numComparacao;
+}
+
+int Ordena::getNumTroca()
+{
+
+    return numTroca;
+}
+
+
 //Troca o conteudo de duas posições do vetor entre si
 void troca(Registro *vet, int p, int q)
 {
@@ -87,14 +100,57 @@ void Ordena::selectionSortPre(Registro *registros, int N){
 
 }
 
-int Ordena::getNumComparacao()
-{
 
-    return numComparacao;
+void Ordena::merge(Registro * vet, int p, int q, int r){
+
+    int i = p;
+    int j = q;
+    int k = 0;
+    Registro *aux = new Registro[r];
+
+    while((i<q) && (j<r))
+    {
+        this->numComparacao++;
+        if(vet[i].getCasos() < vet[j].getCasos())
+        {
+            aux[k] = vet[i];
+            i++;;
+        }
+        else
+        {
+            aux[k] = vet[j];
+            j++;;
+        }
+        k++;
+    }
+    while(i<q)
+    {
+        aux[k] = vet[i]; i++;k++;
+    }
+    while(j<r)
+    {
+        aux[k] = vet[j]; j++;k++;
+    }
+
+    for(int i = p; i<r; i++)
+    {   
+        vet[i] = aux[i-p];
+        this->numTroca++;
+
+    }
+    
+    delete[] aux;
+        
 }
 
-int Ordena::getNumTroca()
+void Ordena::mergeSort(Registro * vet, int p, int r)
 {
-
-    return numTroca;
+    this->numComparacao++;
+    if(p < (r-1))
+    {
+        int q = (p+r)/2;
+        mergeSort(vet, p ,q);
+        mergeSort(vet, q ,r);
+        merge(vet,p,q,r);
+    }
 }
