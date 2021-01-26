@@ -9,77 +9,13 @@
 
 #include "Registro.h"
 #include "Data.h"
+#include "Ordena.h"
+
 
 
 using namespace std;
 using namespace std::chrono;
 
-//Troca o conteudo de duas posições do vetor entre si
-void trocaStr(Registro *registros, int index1, int index2)
-{
-    Registro aux;
-    aux = registros[index1];
-    registros[index1] = registros[index2];
-    registros[index2] = aux;
-
-}
-
-
-void totalDiario(Registro *registros, int N)
-{
-
-    for(int i = N-1 ; i >= 0; i--)
-    {
-        int j = i-1;
-        while((registros[i].getCidade() != registros[j].getCidade()) && j>=0)
-            j--;        
-        if(j>=0)
-            registros[i].setCasos(registros[i].getCasos() - registros[j].getCasos());   
-    }
-
-}
-
-//Ordenação pelo método de seleção onde a comparação leva 3 critérios, que são data, estado e cidade
-void SelectionSorting(Registro *registros, int N){
-
-    string sigla, siglaMin, cidade, cidadeMin;
-    int val1, val2;
-
-    for(int i=0; i<N; i++)
-    {
-        int min = i;
-
-        for(int j = i+1; j<N; j++)
-        { 
-            if(registros[j].getData().compareTo(registros[min].getData()) == -1)
-            {
-                            min = j;
-            }else if(registros[j].getData().compareTo(registros[min].getData()) == 0)
-            {
-                sigla= registros[j].getSigla();
-                siglaMin = registros[min].getSigla();
-
-                if(sigla < siglaMin)
-                {
-                    min = j;
-                }else if (sigla == siglaMin)
-                {
-                    cidade = registros[j].getCidade();
-                    cidadeMin= registros[min].getCidade();
-                    if(cidade < cidadeMin)
-                    {
-                        min = j;
-                    }    
-                }
-            }
-            
-        }
-        
-        trocaStr(registros, min, i);
-      
-    }
-
-}
 
 void imprimeInformacoes(Registro *registros, int N)
 {
@@ -166,9 +102,9 @@ void embaralhaObj(Registro *registro, int tamanho, int k)
 }
 
 //Função para leitura do arquivo em função da quantidade N de registros desejados
-void leArquivoCsv(Registro *registros, int N)
+void leArquivoCsv(Registro *registros, int N, string fileDirectory)
 {
-    ifstream myfile("teste2.csv");
+    ifstream myfile(fileDirectory);
     string line;
     vector<string> dados;
 
@@ -206,14 +142,35 @@ void leArquivoCsv(Registro *registros, int N)
         cerr << "ERRO: O arquivo nao pode ser aberto!" << endl;
 }
 
-int main(){
+void totalDiario(Registro *registros, int N)
+{
 
-    int N = 15;
+    for(int i = N-1 ; i >= 0; i--)
+    {
+        int j = i-1;
+        while((registros[i].getCidade() != registros[j].getCidade()) && j>=0)
+            j--;        
+        if(j>=0)
+            registros[i].setCasos(registros[i].getCasos() - registros[j].getCasos());   
+    }
+
+}
+
+
+int main(int argc, char *argv[]){
+
+    int N;
+    cout << "Digite o numero de registros que deseja analisar" << endl;
+    cin >> N;
+
     Registro *registros = new Registro[N];
-    leArquivoCsv(registros, N);
+    Ordena *ord = new Ordena();
+
+    leArquivoCsv(registros, N, argv[1]);
     //imprimeInformacoes(registros,N);
-    SelectionSorting(registros, N);  
+    ord->selectionSortPre(registros, N);  
     totalDiario(registros, N);
+    ord->selectionSort(registros, N);
     //imprimeInformacoes(registros,N);
     geraCSV(registros, N);
     system ("pause");
