@@ -101,7 +101,8 @@ void Ordena::troca(Registro vet[], int p, int q)
     Registro aux = vet[p];
 
     vet[p] = vet[q];
-    vet[q] = vet[p];
+    vet[q] = aux;
+    
 }
 
 int Ordena::getNumComparacao()
