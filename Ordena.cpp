@@ -95,12 +95,10 @@ int Ordena::medianaDasMedianas(Registro vet[], int inicio, int fim)
     }
 }
 
-void troca(Registro *vet, int p, int q)
+void Ordena::troca(Registro vet[], int p, int q)
 {
 
-    Registro *aux = new Registro();
-
-    *aux = vet[p];
+    Registro aux = vet[p];
 
     vet[p] = vet[q];
     vet[q] = vet[p];
