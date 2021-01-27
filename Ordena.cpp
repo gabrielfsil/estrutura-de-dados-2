@@ -75,13 +75,13 @@ int Ordena::medianaDasMedianas(Registro vet[], int inicio, int fim)
 
     int mediana = vet[meio].getCasos();
 
-    // Se o inicio está entre o meio e o fim | meio < inicio < fim | fim < inicio < meio 
+    // Se o inicio está entre o meio e o fim | meio < inicio < fim | fim < inicio < meio
     if ((vet[inicio].getCasos() > mediana && vet[inicio].getCasos() < vet[fim].getCasos()) || (vet[inicio].getCasos() < mediana && vet[inicio].getCasos() > vet[fim].getCasos()))
     {
         numComparacao = numComparacao + 4;
         return inicio;
     }
-    // Se o fim está entre o meio e o inicio | meio < fim < inicio| inicio < fim < meio 
+    // Se o fim está entre o meio e o inicio | meio < fim < inicio| inicio < fim < meio
     else if ((vet[fim].getCasos() > mediana && vet[fim].getCasos() < vet[inicio].getCasos()) || (vet[fim].getCasos() < mediana && vet[fim].getCasos() > vet[inicio].getCasos()))
     {
         numComparacao = numComparacao + 4;
@@ -116,4 +116,24 @@ int Ordena::getNumTroca()
 {
 
     return numTroca;
+}
+
+void Ordena::insertsort(Registro vet[], int n)
+{
+
+    for (int j = 2; j < n; j++)
+    {
+
+        Registro pivo = vet[j];
+        int i = j - 1;
+
+        while ((i > 0) && (vet[i].getCasos() > pivo.getCasos()))
+        {
+            vet[i + 1] = vet[i];
+            i = i - 1;
+        }
+
+        vet[i+1] = pivo;
+
+    }
 }

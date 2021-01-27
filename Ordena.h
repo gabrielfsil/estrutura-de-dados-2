@@ -9,6 +9,7 @@ class Ordena{
         Ordena();
         ~Ordena();
         void quicksort(Registro vet[], int inicio, int fim);
+        void insertsort(Registro vet[], int n);
         int getNumTroca();
         int getNumComparacao();
     
