@@ -205,15 +205,6 @@ int main(int argc, char *argv[]){
     Registro *registros = new Registro[1500000];
     Ordena *ord = new Ordena();
 
-<<<<<<< HEAD
-    leArquivoCsv(registros, N, argv[1]);
-    //imprimeInformacoes(registros,N);
-    ord->selectionSortPre(registros, N);  
-    totalDiario(registros, N);
-    //ord->selectionSort(registros, N);
-    ord->mergeSort(registros,0,N);
-    geraCSV(registros, N);
-=======
     auto start = high_resolution_clock::now(); //Inicia contador de tempo
 
     int qtdRegistros = leArquivoCsv(registros, argv[1]);
@@ -314,8 +305,7 @@ int main(int argc, char *argv[]){
     // }
     geraCSV(registros, qtdRegistros, "brazil_covid19_cities_processado.csv");
 
-    //geraCSV(analise, N, "saida.csv");
->>>>>>> master
+    geraCSV(analise, N, "saida.csv");
     system ("pause");
 
     delete[] registros;
