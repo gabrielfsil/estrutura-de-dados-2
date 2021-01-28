@@ -1,11 +1,6 @@
 Data,Estado,Nome,Codigo,Casos/Dia,Mortes
-2020-08-07,MG,Belo Horizonte,120030,0,0
-2020-09-28,AC,brasiléia,120010,5,0
-2020-08-07,MG,Santos Dumont,120032,10,0
-2020-09-27,AC,Acrelândia,120001,10,0
-2020-05-15,MG,Juiz de Fora,120025,12,0
-2020-04-24,SP,São Paulo,120033,13,0
-2020-09-27,AC,Assis Brasil,120005,15,0
-2020-04-28,RJ,Cabo Frio,120017,20,0
-2020-05-15,RJ,Volta redonda,120020,25,0
-2020-04-27,RJ,Rio de Janeiro,120013,35,0
+2020-03-19,SP,São Paulo,120035,13,0
+2020-02-05,BA,Salvador,120039,12,0
+2020-03-19,BA,Salvador,120038,20,0
+2020-04-24,SP,São Paulo,120033,10,0
+2020-03-28,RJ,Rio de Janeiro,120017,25,0
