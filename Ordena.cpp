@@ -31,41 +31,22 @@ int Ordena::particionamento(Registro *vet, int inicio, int fim)
     // Escolha do Pivô
     int pivo = medianaDasMedianas(vet, inicio, fim);
 
-    int i = inicio;
-    int j = fim;
+    int i = inicio - 1;
 
-    // Percorre o vetor até os indices se encontrarem
-    do
+    for (int j = inicio; j <= fim - 1; j++)
     {
-
-        // Percorre até achar uma chave maior que o pivô
-        while (vet[i].getCasos() < vet[pivo].getCasos())
+        numComparacao++;
+        if (vet[j].getCasos() < vet[pivo].getCasos())
         {
-            numComparacao++;
             i++;
-        }
-
-        // Percorre até achar uma chave menor que o pivô
-        while (vet[j].getCasos() > vet[pivo].getCasos())
-        {
-            numComparacao++;
-            j--;
-        }
-
-        // Se a chave i que é maior que o pivô está a esquerda da chave j
-        if (i <= j)
-        {
-
-            // Então troca as posições
             troca(vet, i, j);
             numTroca++;
-            i++;
-            j--;
         }
+    }
+    troca(vet, i + 1, fim);
+    numTroca++;
 
-    } while (i <= j);
-
-    return j;
+    return (i + 1);
 }
 
 int Ordena::medianaDasMedianas(Registro vet[], int inicio, int fim)
@@ -102,7 +83,6 @@ void Ordena::troca(Registro vet[], int p, int q)
 
     vet[p] = vet[q];
     vet[q] = aux;
-    
 }
 
 int Ordena::getNumComparacao()
@@ -132,7 +112,6 @@ void Ordena::insertsort(Registro vet[], int n)
             i = i - 1;
         }
 
-        vet[i+1] = pivo;
-
+        vet[i + 1] = pivo;
     }
 }
