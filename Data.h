@@ -19,6 +19,7 @@ class Data{
         int getMes();
         int getAno();
         void imprimir();
+        int compareTo(Data data);
 
     private:
         int dia;

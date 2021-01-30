@@ -10,13 +10,17 @@ class Ordena{
         ~Ordena();
         void quicksort(Registro vet[], int inicio, int fim);
         void insertsort(Registro vet[], int n);
+        void selectionSortPre(Registro *registros, int N);
+        void selectionSort(Registro *vet, int N);
+        void mergeSort(Registro * vetor, int p,  int r);
+        void merge(Registro * vet, int p, int q, int r);
         int getNumTroca();
         int getNumComparacao();
     
     private:
         int particionamento(Registro vet[], int inicio, int fim);
         void troca(Registro vet[], int p, int q);
-        int medianaDasMedianas(Registro vet[], int inicio, int fim);
+        void medianaDasMedianas(Registro vet[], int inicio, int fim);
         int numTroca;
         int numComparacao;
 };

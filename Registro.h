@@ -12,6 +12,7 @@ class Registro{
         Registro();
         Registro(string data, string sigla, string cidade, int casos, int mortes, int codigo);
         ~Registro();
+        void setData(string str);
         void setSigla(string sigla);
         void setCidade(string cidade);
         void setCasos(int casos);
@@ -23,9 +24,12 @@ class Registro{
         int getMortes();
         int getCodigo();
         Data getData();
+        string getDataStr();
+
 
     private:
         Data data;
+        string dataStr;
         string sigla;
         string cidade;
         int casos;

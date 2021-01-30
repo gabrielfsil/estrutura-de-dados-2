@@ -87,3 +87,37 @@ void Data::imprimir()
 
     cout << dia << "/" << mes << "/" << ano;
 }
+
+//Função que compara duas datas
+// retorna -1 se a data que invoca a função for menor que o parâmetro
+// retorna 1 se a data que invoca a função for maior que o parâmetro
+// retorna 0 se a as datas forem iguais
+int Data::compareTo(Data data){
+
+    int dia1 = this->getDia();
+    int dia2 = data.getDia();
+    int mes1 = this->getMes();
+    int mes2 = data.getMes();
+    int ano1 = this->getAno();
+    int ano2 = data.getAno();
+
+    if(ano1 > ano2){
+        return 1;
+    }else if (ano1 == ano2){
+        if(mes1>mes2){
+            return 1;
+        }else if(mes1 == mes2){
+            if(dia1>dia2){
+                return 1;
+            }else if (dia1 == dia2){
+                return 0;
+            }else{
+                return -1;
+            }
+        }else{
+            return -1;
+        }
+    }else{
+        return -1;
+    }
+}
