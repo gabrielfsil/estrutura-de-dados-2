@@ -8,14 +8,16 @@ class Ordena{
     public:
         Ordena();
         ~Ordena();
-        void selectionSortPre(Registro *registros, int N);
         void selectionSort(Registro *vet, int N);
+        void quicksortPre(Registro vet[], int inicio, int fim);
         int getNumTroca();
         int getNumComparacao();
     
     private:
         int numTroca;
         int numComparacao;
+         int particionamentoPre(Registro vet[], int inicio, int fim);
+         void troca(Registro vet[], int p, int q);
 };
 
 

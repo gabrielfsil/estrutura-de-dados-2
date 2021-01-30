@@ -103,7 +103,7 @@ void shuffle(Registro *registro, int tamanho)
 
 
 //Função para leitura do arquivo em função da quantidade N de registros desejados
-int leArquivoCsv(Registro *registros, string fileDirectory)
+int leArquivoCsv(Registro *registros, string fileDirectory, map<int,int> &registrosPorCidade)
 {
     ifstream myfile(fileDirectory);
     string line;
@@ -132,6 +132,18 @@ int leArquivoCsv(Registro *registros, string fileDirectory)
 
                 //Limpa o vetor dos dados da linha para reuso
                 dados.clear();
+                int codigoCidade = registros[i-1].getCodigo();
+
+                //Checa se no vetor existe a chave de mesmo código que o do registro
+                if ( registrosPorCidade.find(codigoCidade) == registrosPorCidade.end() ) 
+                {
+                    //Se não, ele cria a chave e adiciona 1 registro a ela   
+                    registrosPorCidade.insert(make_pair(codigoCidade, 1));
+                }else
+                {
+                    //Se já existe incrementa o  número de registros da cidade
+                    registrosPorCidade[codigoCidade]++;
+                }
             }
             i++;
         }
@@ -174,20 +186,26 @@ Registro *randomReg(Registro *registros, int N)
 }
 
 //Função para separar o cumulativo de casos nas cidades em casos por dia
-//O vetor de registros é percorrido de trás para frente e assim que o registro da iteração atual
-//encontra o primeiro seguinte a ele, é descontado dos casos do registro atual o valor de casos
+//O vetor de registros é percorrido de trás para frente e escolhendo uma cidade
+//é checado se a mesma possui mais de um registro, se sim o algoritmo busca pela primeira
+//cidade seguinte a ele, então é descontado dos casos do registro atual o valor de casos
 //do seu próximo.
-void totalDiario(Registro *registros, int N)
+void totalDiario(Registro *registros, int N, map<int,int> &registrosPorCidade)
 {
 
     for(int i = N-1 ; i > 0; i--)
     {
         int j = i-1;
-        while((registros[i].getCidade() != registros[j].getCidade()) && j>0)
-            j--;        
-        
-        if(registros[i].getCidade()==registros[j].getCidade())
-            registros[i].setCasos(registros[i].getCasos() - registros[j].getCasos());   
+
+        //Se a cidade possui mais de um registro sobre ela
+        if(registrosPorCidade[registros[i].getCodigo()]>1)
+        {   
+            //Percorre os registros até achar o próximo registro que possua o mesmo código de cidade
+            while((registros[i].getCodigo() != registros[j].getCodigo()) && j>0)
+                j--;        
+            if((registros[i].getCodigo() == registros[j].getCodigo()) && (registros[i].getCodigo() > registros[j].getCodigo()))
+                registros[i].setCasos(registros[i].getCasos() - registros[j].getCasos()); 
+        }
     }
 
 }
@@ -203,20 +221,57 @@ int main(int argc, char *argv[]){
 
     //Pré-processamento 
     Registro *registros = new Registro[1500000];
+
+    //Vetor do tipo key value para servir do contador de registros por cidade
+    map<int,int> registrosPorCidade ;
     Ordena *ord = new Ordena();
 
-    auto start = high_resolution_clock::now(); //Inicia contador de tempo
+    ofstream outfile(argv[2]);
 
-    int qtdRegistros = leArquivoCsv(registros, argv[1]);
-    ord->selectionSortPre(registros, qtdRegistros);  
-    totalDiario(registros, qtdRegistros);
+    outfile << "Registros para análises dos algritmos: " << N << endl;
 
-    //Vetor para analise dos algoritmos
-    Registro * analise = randomReg(registros, N);
+    auto start1 = high_resolution_clock::now(); //Inicia contador de tempo
 
-    auto stop = high_resolution_clock::now(); //Termina de contar o tempo
-    auto duration =  duration_cast<microseconds>(stop - start);
-    cout << "A operação durou " << duration.count() << " milisegundos" << endl;
+    int qtdRegistros = leArquivoCsv(registros, argv[1], registrosPorCidade);
+
+    cout << "leu registros" << endl ;
+
+    auto stop1 = high_resolution_clock::now(); //Termina de contar o tempo
+    auto duration1 =  duration_cast<milliseconds>(stop1 - start1);
+
+    outfile << "Tempo de leitura: " << duration1.count() << " ms" << endl;
+
+    auto start2 = high_resolution_clock::now(); //Inicia contador de tempo
+
+    ord->quicksortPre(registros, 0, qtdRegistros-1);  
+
+    auto stop2 = high_resolution_clock::now(); //Termina de contar o tempo
+    auto duration2 =  duration_cast<milliseconds>(stop2 - start2);
+
+    cout <<"ordenou" << endl ;
+
+    outfile << "Tempo de ordenação pré-processamento " << duration2.count() << " ms" << endl;
+
+    auto start3 = high_resolution_clock::now(); //Inicia contador de tempo
+
+    cout<< "calculando o total diario" << endl;
+    totalDiario(registros, qtdRegistros, registrosPorCidade);
+
+    auto stop3 = high_resolution_clock::now(); //Termina de contar o tempo
+    auto duration3 =  duration_cast<milliseconds>(stop3 - start3);
+
+    outfile << "Tempo de cáluclo de total diário: " << duration3.count() << " ms" << endl;
+
+    // //Vetor para analise dos algoritmos
+    // Registro * analise = randomReg(registros, N);
+
+    int totalDuration = duration1.count() + duration2.count()+duration3.count();
+    cout << "A operação toda durou " << totalDuration << " milisegundos" << endl;
+
+    outfile << "Operção toda durou: " << totalDuration << " ms " << endl;
+
+    outfile.close();
+
 
     // //Modulo de testes
     // int saida;
@@ -309,7 +364,7 @@ int main(int argc, char *argv[]){
     system ("pause");
 
     delete[] registros;
-    delete[] analise;
+    //delete[] analise;
     
     return 0;
 };
