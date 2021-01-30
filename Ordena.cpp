@@ -103,37 +103,6 @@ bool iMenorQuePivo(Registro *registros, int i, int pivo)
     return false;
 }
 
-bool jMaiorQuePivo(Registro *registros, int j, int pivo)
-{
-    string sigla, siglaPivo, cidade, cidadePivo;
-
-    if(registros[j].getData().compareTo(registros[pivo].getData()) == 1)
-    {
-        return true;
-    }else if(registros[j].getData().compareTo(registros[pivo].getData()) == 0)
-    {
-        sigla= registros[j].getSigla();
-        siglaPivo = registros[pivo].getSigla();
-
-        if(sigla > siglaPivo)
-        {
-            return true;
-        }else if (sigla == siglaPivo)
-        {
-            cidade = registros[j].getCidade();
-            cidadePivo= registros[pivo].getCidade();
-            if(cidade > cidadePivo)
-            {
-                return true;
-            }
-            return false; 
-        }
-        return false;
-    }
-    return false;
-}
-    
-
 int Ordena::particionamentoPre(Registro *vet, int inicio, int fim)
 {
 
