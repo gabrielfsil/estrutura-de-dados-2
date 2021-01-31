@@ -7,7 +7,7 @@ Repositório usado para desenvolvimento do Trabalho Prático da disciplina DCC 0
 Para executar o programa execute o seguinte código na pasta do repositório:
 
 ```
-g++ *.cpp && ./a.out
+g++ *.cpp && ./a.out ./brazil_covid19_cities_processado.csv
 ```
 
 ## GIT TUTORIAL

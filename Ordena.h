@@ -22,7 +22,7 @@ public:
 private:
     int particionamento(Registro vet[], int inicio, int fim);
     void troca(Registro vet[], int p, int q);
-    void medianaDasMedianas(Registro vet[], int inicio, int fim);
+    void medianaDeTres(Registro vet[], int inicio, int fim);
     int numTroca;
     int numComparacao;
     int particionamentoPre(Registro vet[], int inicio, int fim);

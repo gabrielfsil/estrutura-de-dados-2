@@ -289,9 +289,9 @@ int main(int argc, char *argv[])
     // outfile << "Operação toda durou: " << totalDuration << " ms " << endl;
     // outfile.close();
 
-    //Analise dos algoritmos
+    // //Analise dos algoritmos
 
-    ofstream saida("saida.txt");
+    ofstream saida("saida-quick-sort.txt");
 
     int N[5] = {10000, 50000, 100000, 500000, 1000000};
     Registro *processado = new Registro[1500000];
@@ -299,14 +299,13 @@ int main(int argc, char *argv[])
     leArquivoProcessado(processado, argv[1]);
     cout << "Leitura Concluída!" << endl;
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 4; i < 5; i++)
     {
-        Registro *analise = randomReg(processado, N[i]);
         saida << "Número de registros analisados: " << N[i] << endl;
         cout << "Número de registros analisados: " << N[i] << endl;
         saida << " " << endl;
 
-        for (int k = 0; k < 4; k++)
+        for (int k = 3; k < 4; k++)
         {
             Ordena *ordAnalise = new Ordena();
 
@@ -333,22 +332,23 @@ int main(int argc, char *argv[])
 
             for (int m = 0; m < 5; m++)
             {
+                Registro *analise = randomReg(processado, N[i]);
                 saida << "M = " << m << endl;
                 cout << "M = " << m << endl;
                 auto analiseStart = high_resolution_clock::now(); //Inicia contador de tempo
                 switch (k)
                 {
                 case 0:
-                    ordAnalise->insertsort(processado, N[i]);
+                    ordAnalise->insertsort(analise, N[i]);
                     break;
                 case 1:
-                    ordAnalise->selectionSort(processado, N[i]);
+                    ordAnalise->selectionSort(analise, N[i]);
                     break;
                 case 2:
-                    ordAnalise->mergeSort(processado, 0, N[i]);
+                    ordAnalise->mergeSort(analise, 0, N[i]);
                     break;
                 case 3:
-                    ordAnalise->quicksort(processado, 0, N[i] - 1);
+                    ordAnalise->quicksort(analise, 0, N[i]);
                     break;
                 }
                 auto analiseStop = high_resolution_clock::now(); //Inicia contador de tempo
@@ -359,11 +359,12 @@ int main(int argc, char *argv[])
                 saida << "Número de trocas: " << ordAnalise->getNumTroca() << endl;
                 saida << "Tempo de execução: " << analiseDuration.count() << " ms" << endl;
                 saida << " " << endl;
-                
-                
+
+                delete[] analise;
             }
             saida << "Media dos tempos de execução: " << media / 5 << " ms" << endl;
             saida << " " << endl;
+
             // delete[] ordAnalise;
         }
         saida << " ================================= " << endl;
@@ -374,8 +375,8 @@ int main(int argc, char *argv[])
     // //Modulo de testes
     // int saida;
     // cout << "=====Modulo de testes=====" << endl;
-    // cout << "Digite 1 se deseja exibir o resultado no console"<< endl;
-    // cout << "Digite 2 se deseja o resultado num arquivo"<< endl;
+    // cout << "Digite 1 se deseja exibir o resultado no console" << endl;
+    // cout << "Digite 2 se deseja o resultado num arquivo" << endl;
     // cin >> saida;
 
     // int opcao;
@@ -388,71 +389,102 @@ int main(int argc, char *argv[])
     // cout << "6 - Ordenação MergeSort" << endl;
     // cin >> opcao;
 
-    // switch(opcao)
+    // switch (opcao)
     // {
-    //     case 1 :
-    //             if(saida==1){
-    //                 Registro * teste = randomReg(registros, 10);
-    //                 ord->quicksortPre(teste, 10);
-    //                 imprimeInformacoes(teste,10);
-    //             }
-    //             else{
-    //                 Registro * teste = randomReg(registros, 100);
-    //                 ord->quicksortPre(teste, 100);
-    //                 geraCSV(teste, 100, "teste-pre-processamento.csv");
-
-    //             }
-    //             break;
-    //     case 2:
-    //             if(saida==1){
-    //                 Registro * teste = randomReg(registros, 10);
-    //                 imprimeInformacoes(teste,10);
-    //                 delete [] teste;
-
-    //             }
-    //             else{
-    //                 Registro * teste = randomReg(registros, 100);
-    //                 geraCSV(teste, 100, "teste-importacao.csv");
-    //                 delete [] teste;
-    //             }
-    //             break;
-    //     case 3 :
-    //            //
-    //            break;
-    //     case 4:
-    //             if(saida==1){
-    //                 Registro * teste = randomReg(registros, 10);
-    //                 ord->selectionSort(teste, 10);
-    //                 imprimeInformacoes(teste,10);
-    //                 delete [] teste;
-
-    //             }else{
-    //                 Registro * teste = randomReg(registros, 100);
-    //                 ord->selectionSort(teste, 100);
-    //                 geraCSV(teste, 100, "teste-selection-sort.csv");
-    //                 delete [] teste;
-
-    //             }
-    //             break;
-    //     case 5: //
-    //             break;
-    //     case 6:
-    //             // if(saida==1){
-    //             //     Registro * teste = randomReg(registros, 10);
-    //             //     ord->mergeSort(teste,0, 10);
-    //             //     imprimeInformacoes(teste,10);
-    //             //     delete [] teste;
-
-    //             // }else{
-    //             //     Registro * teste = randomReg(registros, 100);
-    //             //     ord->mergeSort(teste,0, 100);
-    //             //     imprimeInformacoes(teste,100);
-    //             //     delete [] teste;
-
-    //             // }
-    //             break;
-    //         default: cout << "Opção inválida" << endl;
-
+    // case 1:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         ord->quicksortPre(teste, 0, 10);
+    //         imprimeInformacoes(teste, 10);
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         ord->quicksortPre(teste, 0, 100);
+    //         geraCSV(teste, 100, "teste-pre-processamento.csv");
+    //     }
+    //     break;
+    // case 2:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         geraCSV(teste, 100, "teste-importacao.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 3:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         ord->insertsort(teste, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         ord->insertsort(teste, 100);
+    //         geraCSV(teste, 100, "teste-insertion-sort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 4:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         ord->selectionSort(teste, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         ord->selectionSort(teste, 100);
+    //         geraCSV(teste, 100, "teste-selection-sort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 5: //
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         ord->quicksort(teste, 0, 9);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         ord->quicksort(teste, 0, 99);
+    //         geraCSV(teste, 100, "teste-quick-sort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 6:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(processado, 10);
+    //         ord->mergeSort(teste, 0, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(processado, 100);
+    //         ord->mergeSort(teste, 0, 100);
+    //         imprimeInformacoes(teste, 100);
+    //         delete[] teste;
+    //     }
+    //     break;
+    // default:
+    //     cout << "Opção inválida" << endl;
     // }
     //geraCSV(registros, qtdRegistros, "brazil_covid19_cities_processado.csv");
 

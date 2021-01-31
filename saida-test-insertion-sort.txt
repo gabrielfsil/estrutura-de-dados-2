@@ -1,0 +1,107 @@
+Número de registros analisados: 10000
+ 
+Insertion Sort
+M = 0
+Número de comparações: 23789265
+Número de trocas: 23779266
+Tempo de execução: 2608 ms
+ 
+M = 1
+Número de comparações: 47225262
+Número de trocas: 47205264
+Tempo de execução: 1178 ms
+ 
+M = 2
+Número de comparações: 70640469
+Número de trocas: 70610472
+Tempo de execução: 1031 ms
+ 
+M = 3
+Número de comparações: 94179957
+Número de trocas: 94139961
+Tempo de execução: 1045 ms
+ 
+M = 4
+Número de comparações: 117691358
+Número de trocas: 117641363
+Tempo de execução: 1017 ms
+ 
+Media dos tempos de execução: 1375 ms
+ 
+ ================================= 
+Número de registros analisados: 50000
+ 
+Insertion Sort
+M = 0
+Número de comparações: 586869516
+Número de trocas: 586819517
+Tempo de execução: 43317 ms
+ 
+M = 1
+Número de comparações: 1174725055
+Número de trocas: 1174625057
+Tempo de execução: 40858 ms
+ 
+M = 2
+Número de comparações: 1762120663
+Número de trocas: 1761970666
+Tempo de execução: 35011 ms
+ 
+M = 3
+Número de comparações: -1944256471
+Número de trocas: -1944456467
+Tempo de execução: 33439 ms
+ 
+M = 4
+Número de comparações: -1354391124
+Número de trocas: -1354641119
+Tempo de execução: 33665 ms
+ 
+Media dos tempos de execução: 37258 ms
+ 
+ ================================= 
+Número de registros analisados: 100000
+ 
+Insertion Sort
+M = 0
+Número de comparações: -1935708494
+Número de trocas: -1935808493
+Tempo de execução: 144980 ms
+ 
+M = 1
+Número de comparações: 420490533
+Número de trocas: 420290535
+Tempo de execução: 140904 ms
+ 
+M = 2
+Número de comparações: -1517159453
+Número de trocas: -1517459450
+Tempo de execução: 143805 ms
+ 
+M = 3
+Número de comparações: 839445535
+Número de trocas: 839045539
+Tempo de execução: 138034 ms
+ 
+M = 4
+Número de comparações: -1092738969
+Número de trocas: -1093238964
+Tempo de execução: 138380 ms
+ 
+Media dos tempos de execução: 141220 ms
+ 
+ ================================= 
+Número de registros analisados: 500000
+ 
+Insertion Sort
+M = 0
+Número de comparações: -605648925
+Número de trocas: -606148924
+Tempo de execução: 5310256 ms
+ 
+M = 1
+Número de comparações: -1140297514
+Número de trocas: -1141297512
+Tempo de execução: 4991027 ms
+ 
+M = 2

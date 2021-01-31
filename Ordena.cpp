@@ -32,31 +32,49 @@ void Ordena::quicksort(Registro vet[], int inicio, int fim)
 int Ordena::particionamento(Registro *vet, int inicio, int fim)
 {
 
-    // Escolha do Pivô
-    medianaDasMedianas(vet, inicio, fim);
+    // // Escolha do Pivô
+    // medianaDeTres(vet, inicio, fim);
+    // int pivo = fim;
+
+    // int i = inicio - 1;
+
+    // for (int j = inicio; j <= fim - 1; j++)
+    // {
+    //     numComparacao++;
+    //     if (vet[j].getCasos() < vet[pivo].getCasos())
+    //     {
+    //         i++;
+    //         troca(vet, i, j);
+    //         numTroca++;
+    //     }
+    // }
+
+    // troca(vet, i + 1, fim);
+
+    // numTroca++;
+
+    // return (i + 1);
+        // Escolha do Pivô
     int pivo = fim;
 
     int i = inicio - 1;
 
-    for (int j = inicio; j <= fim; j++)
+    // Percorre o vetor até os indices se encontrarem
+    for (int j = inicio; j <= fim - 1; j++)
     {
-        numComparacao++;
+        // If current element is smaller than the pivot
         if (vet[j].getCasos() < vet[pivo].getCasos())
         {
-            i++;
+            i++; // increment index of smaller element
             troca(vet, i, j);
-            numTroca++;
         }
     }
 
     troca(vet, i + 1, fim);
-
-    numTroca++;
-
     return (i + 1);
 }
 
-void Ordena::medianaDasMedianas(Registro vet[], int inicio, int fim)
+void Ordena::medianaDeTres(Registro vet[], int inicio, int fim)
 {
 
     int meio = (inicio + fim) / 2;
@@ -105,6 +123,7 @@ void Ordena::medianaDasMedianas(Registro vet[], int inicio, int fim)
     }
 
     troca(vet, mediana, fim);
+    numTroca++;
 }
 
 int Ordena::getNumComparacao()
@@ -122,14 +141,17 @@ int Ordena::getNumTroca()
 void Ordena::insertsort(Registro vet[], int n)
 {
 
-    for (int j = 2; j < n; j++)
+    for (int j = 1; j < n; j++)
     {
 
         Registro pivo = vet[j];
         int i = j - 1;
 
-        while ((i > 0) && (vet[i].getCasos() > pivo.getCasos()))
+        numComparacao++;
+        while ((i >= 0) && (vet[i].getCasos() > pivo.getCasos()))
         {
+            numTroca++;
+            numComparacao++;
             vet[i + 1] = vet[i];
             i = i - 1;
         }
@@ -155,7 +177,7 @@ void Ordena::selectionSort(Registro *vet, int N)
         for (int j = i + 1; j < N; j++)
         {
             this->numComparacao++;
-            if(vet[j].getCasos() < vet[min].getCasos())
+            if (vet[j].getCasos() < vet[min].getCasos())
             {
                 min = j;
             }
@@ -165,11 +187,10 @@ void Ordena::selectionSort(Registro *vet, int N)
     }
 }
 
-
 void Ordena::quicksortPre(Registro vet[], int inicio, int fim)
 {
 
-    if (inicio<fim)
+    if (inicio < fim)
     {
         // Retorna a posição do pivô já ordenado
         int q = particionamentoPre(vet, inicio, fim);
@@ -184,26 +205,28 @@ bool iMenorQuePivo(Registro *registros, int i, int pivo)
 {
     string sigla, siglaPivo, cidade, cidadePivo;
 
-    if(registros[i].getData().compareTo(registros[pivo].getData()) == -1)
+    if (registros[i].getData().compareTo(registros[pivo].getData()) == -1)
     {
         return true;
-    }else if(registros[i].getData().compareTo(registros[pivo].getData()) == 0)
+    }
+    else if (registros[i].getData().compareTo(registros[pivo].getData()) == 0)
     {
-        sigla= registros[i].getSigla();
+        sigla = registros[i].getSigla();
         siglaPivo = registros[pivo].getSigla();
 
-        if(sigla < siglaPivo)
+        if (sigla < siglaPivo)
         {
             return true;
-        }else if (sigla == siglaPivo)
+        }
+        else if (sigla == siglaPivo)
         {
             cidade = registros[i].getCidade();
-            cidadePivo= registros[pivo].getCidade();
-            if(cidade < cidadePivo)
+            cidadePivo = registros[pivo].getCidade();
+            if (cidade < cidadePivo)
             {
                 return true;
             }
-            return false; 
+            return false;
         }
         return false;
     }
@@ -216,21 +239,21 @@ int Ordena::particionamentoPre(Registro *vet, int inicio, int fim)
     // Escolha do Pivô
     int pivo = fim;
 
-    int i = inicio-1;
+    int i = inicio - 1;
 
     // Percorre o vetor até os indices se encontrarem
-    for (int j = inicio; j <= fim-1;  j++)
+    for (int j = inicio; j <= fim - 1; j++)
     {
         // If current element is smaller than the pivot
-        if (iMenorQuePivo(vet, j,pivo))
+        if (iMenorQuePivo(vet, j, pivo))
         {
-            i++;    // increment index of smaller element
-            troca(vet ,i,j);
+            i++; // increment index of smaller element
+            troca(vet, i, j);
         }
     }
 
-    troca(vet, i+1, fim);
-    return (i+1);
+    troca(vet, i + 1, fim);
+    return (i + 1);
 }
 
 void Ordena::merge(Registro *vet, int p, int q, int r)

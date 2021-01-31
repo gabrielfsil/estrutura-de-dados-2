@@ -2,28 +2,28 @@ Número de registros analisados: 10000
  
 Insertion Sort
 M = 0
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 1228 ms
+Número de comparações: 23334292
+Número de trocas: 23334292
+Tempo de execução: 1227 ms
  
 M = 1
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 2 ms
+Número de comparações: 23334292
+Número de trocas: 23334292
+Tempo de execução: 1 ms
  
 M = 2
-Número de comparações: 0
-Número de trocas: 0
+Número de comparações: 23334292
+Número de trocas: 23334292
 Tempo de execução: 1 ms
  
 M = 3
-Número de comparações: 0
-Número de trocas: 0
+Número de comparações: 23334292
+Número de trocas: 23334292
 Tempo de execução: 1 ms
  
 M = 4
-Número de comparações: 0
-Número de trocas: 0
+Número de comparações: 23334292
+Número de trocas: 23334292
 Tempo de execução: 1 ms
  
 Media dos tempos de execução: 246 ms
@@ -32,154 +32,466 @@ Selection Sort
 M = 0
 Número de comparações: 49995000
 Número de trocas: 10000
-Tempo de execução: 442 ms
+Tempo de execução: 377 ms
  
 M = 1
 Número de comparações: 99990000
 Número de trocas: 20000
-Tempo de execução: 404 ms
+Tempo de execução: 485 ms
  
 M = 2
 Número de comparações: 149985000
 Número de trocas: 30000
-Tempo de execução: 418 ms
+Tempo de execução: 414 ms
  
 M = 3
 Número de comparações: 199980000
 Número de trocas: 40000
-Tempo de execução: 396 ms
+Tempo de execução: 371 ms
  
 M = 4
 Número de comparações: 249975000
 Número de trocas: 50000
-Tempo de execução: 410 ms
+Tempo de execução: 488 ms
  
-Media dos tempos de execução: 414 ms
+Media dos tempos de execução: 427 ms
  
 Merge Sort
 M = 0
-Número de comparações: 95369
+Número de comparações: 95325
 Número de trocas: 133616
-Tempo de execução: 1845 ms
+Tempo de execução: 1910 ms
  
 M = 1
-Número de comparações: 190738
+Número de comparações: 190650
 Número de trocas: 267232
-Tempo de execução: 1758 ms
+Tempo de execução: 2229 ms
  
 M = 2
-Número de comparações: 286107
+Número de comparações: 285975
 Número de trocas: 400848
-Tempo de execução: 1855 ms
+Tempo de execução: 3133 ms
  
 M = 3
-Número de comparações: 381476
+Número de comparações: 381300
 Número de trocas: 534464
-Tempo de execução: 1803 ms
+Tempo de execução: 3273 ms
  
 M = 4
-Número de comparações: 476845
+Número de comparações: 476625
 Número de trocas: 668080
-Tempo de execução: 1726 ms
+Tempo de execução: 3199 ms
  
-Media dos tempos de execução: 1797 ms
+Media dos tempos de execução: 2748 ms
  
 Quick Sort
 M = 0
-Número de comparações: 8074966
-Número de trocas: 25857
-Tempo de execução: 94 ms
+Número de comparações: 7959969
+Número de trocas: 27424
+Tempo de execução: 127 ms
  
 M = 1
-Número de comparações: 16149932
-Número de trocas: 51714
-Tempo de execução: 91 ms
+Número de comparações: 15919938
+Número de trocas: 54848
+Tempo de execução: 123 ms
  
 M = 2
-Número de comparações: 24224898
-Número de trocas: 77571
-Tempo de execução: 98 ms
+Número de comparações: 23879907
+Número de trocas: 82272
+Tempo de execução: 113 ms
  
 M = 3
-Número de comparações: 32299864
-Número de trocas: 103428
-Tempo de execução: 94 ms
+Número de comparações: 31839876
+Número de trocas: 109696
+Tempo de execução: 110 ms
  
 M = 4
-Número de comparações: 40374830
-Número de trocas: 129285
-Tempo de execução: 98 ms
+Número de comparações: 39799845
+Número de trocas: 137120
+Tempo de execução: 115 ms
  
-Media dos tempos de execução: 95 ms
+Media dos tempos de execução: 117 ms
  
  ================================= 
 Número de registros analisados: 50000
  
 Insertion Sort
 M = 0
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 62124 ms
+Número de comparações: 560339435
+Número de trocas: 560339435
+Tempo de execução: 67086 ms
  
 M = 1
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 9 ms
+Número de comparações: 560339435
+Número de trocas: 560339435
+Tempo de execução: 8 ms
  
 M = 2
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 9 ms
+Número de comparações: 560339435
+Número de trocas: 560339435
+Tempo de execução: 8 ms
  
 M = 3
-Número de comparações: 0
-Número de trocas: 0
+Número de comparações: 560339435
+Número de trocas: 560339435
 Tempo de execução: 10 ms
  
 M = 4
-Número de comparações: 0
-Número de trocas: 0
-Tempo de execução: 10 ms
+Número de comparações: 560339435
+Número de trocas: 560339435
+Tempo de execução: 8 ms
  
-Media dos tempos de execução: 12432 ms
+Media dos tempos de execução: 13424 ms
  
 Selection Sort
 M = 0
 Número de comparações: 1249975000
 Número de trocas: 50000
-Tempo de execução: 39471 ms
+Tempo de execução: 24219 ms
  
 M = 1
 Número de comparações: -1795017296
 Número de trocas: 100000
-Tempo de execução: 25909 ms
+Tempo de execução: 29478 ms
  
 M = 2
 Número de comparações: -545042296
 Número de trocas: 150000
-Tempo de execução: 33617 ms
+Tempo de execução: 25563 ms
  
 M = 3
 Número de comparações: 704932704
 Número de trocas: 200000
-Tempo de execução: 55726 ms
+Tempo de execução: 25819 ms
  
 M = 4
 Número de comparações: 1954907704
 Número de trocas: 250000
-Tempo de execução: 54824 ms
+Tempo de execução: 31533 ms
  
-Media dos tempos de execução: 41909 ms
+Media dos tempos de execução: 27322 ms
  
 Merge Sort
 M = 0
-Número de comparações: 545006
+Número de comparações: 543939
 Número de trocas: 784464
-Tempo de execução: 114270 ms
+Tempo de execução: 79632 ms
  
 M = 1
-Número de comparações: 1090012
+Número de comparações: 1087878
 Número de trocas: 1568928
-Tempo de execução: 100801 ms
+Tempo de execução: 81905 ms
  
 M = 2
+Número de comparações: 1631817
+Número de trocas: 2353392
+Tempo de execução: 116150 ms
+ 
+M = 3
+Número de comparações: 2175756
+Número de trocas: 3137856
+Tempo de execução: 120814 ms
+ 
+M = 4
+Número de comparações: 2719695
+Número de trocas: 3922320
+Tempo de execução: 86814 ms
+ 
+Media dos tempos de execução: 97063 ms
+ 
+Quick Sort
+M = 0
+Número de comparações: 208119885
+Número de trocas: 129219
+Tempo de execução: 2428 ms
+ 
+M = 1
+Número de comparações: 416239770
+Número de trocas: 258438
+Tempo de execução: 2425 ms
+ 
+M = 2
+Número de comparações: 624359655
+Número de trocas: 387657
+Tempo de execução: 2571 ms
+ 
+M = 3
+Número de comparações: 832479540
+Número de trocas: 516876
+Tempo de execução: 2529 ms
+ 
+M = 4
+Número de comparações: 1040599425
+Número de trocas: 646095
+Tempo de execução: 1849 ms
+ 
+Media dos tempos de execução: 2360 ms
+ 
+ ================================= 
+Número de registros analisados: 100000
+ 
+Insertion Sort
+M = 0
+Número de comparações: 1750752103
+Número de trocas: 1750752103
+Tempo de execução: 182087 ms
+ 
+M = 1
+Número de comparações: 1750752103
+Número de trocas: 1750752103
+Tempo de execução: 18 ms
+ 
+M = 2
+Número de comparações: 1750752103
+Número de trocas: 1750752103
+Tempo de execução: 20 ms
+ 
+M = 3
+Número de comparações: 1750752103
+Número de trocas: 1750752103
+Tempo de execução: 19 ms
+ 
+M = 4
+Número de comparações: 1750752103
+Número de trocas: 1750752103
+Tempo de execução: 14 ms
+ 
+Media dos tempos de execução: 36431 ms
+ 
+Selection Sort
+M = 0
+Número de comparações: 704982704
+Número de trocas: 100000
+Tempo de execução: 137966 ms
+ 
+M = 1
+Número de comparações: 1409965408
+Número de trocas: 200000
+Tempo de execução: 106764 ms
+ 
+M = 2
+Número de comparações: 2114948112
+Número de trocas: 300000
+Tempo de execução: 103176 ms
+ 
+M = 3
+Número de comparações: -1475036480
+Número de trocas: 400000
+Tempo de execução: 128908 ms
+ 
+M = 4
+Número de comparações: -770053776
+Número de trocas: 500000
+Tempo de execução: 116527 ms
+ 
+Media dos tempos de execução: 118668 ms
+ 
+Merge Sort
+M = 0
+Número de comparações: 1136773
+Número de trocas: 1668928
+Tempo de execução: 352146 ms
+ 
+M = 1
+Número de comparações: 2273546
+Número de trocas: 3337856
+Tempo de execução: 396609 ms
+ 
+M = 2
+Número de comparações: 3410319
+Número de trocas: 5006784
+Tempo de execução: 342671 ms
+ 
+M = 3
+Número de comparações: 4547092
+Número de trocas: 6675712
+Tempo de execução: 444902 ms
+ 
+M = 4
+Número de comparações: 5683865
+Número de trocas: 8344640
+Tempo de execução: 447885 ms
+ 
+Media dos tempos de execução: 396842 ms
+ 
+Quick Sort
+M = 0
+Número de comparações: 823315733
+Número de trocas: 261835
+Tempo de execução: 19480 ms
+ 
+M = 1
+Número de comparações: 1646631466
+Número de trocas: 523670
+Tempo de execução: 20730 ms
+ 
+M = 2
+Número de comparações: -1825020097
+Número de trocas: 785505
+Tempo de execução: 14381 ms
+ 
+M = 3
+Número de comparações: -1001704364
+Número de trocas: 1047340
+Tempo de execução: 15794 ms
+ 
+M = 4
+Número de comparações: -178388631
+Número de trocas: 1309175
+Tempo de execução: 15211 ms
+ 
+Media dos tempos de execução: 17119 ms
+ 
+ ================================= 
+Número de registros analisados: 500000
+ 
+Insertion Sort
+M = 0
+Número de comparações: -334161804
+Número de trocas: -334161804
+Tempo de execução: 5725262 ms
+ 
+M = 1
+Número de comparações: -334161804
+Número de trocas: -334161804
+Tempo de execução: 54 ms
+ 
+M = 2
+Número de comparações: -334161804
+Número de trocas: -334161804
+Tempo de execução: 53 ms
+ 
+M = 3
+Número de comparações: -334161804
+Número de trocas: -334161804
+Tempo de execução: 52 ms
+ 
+M = 4
+Número de comparações: -334161804
+Número de trocas: -334161804
+Tempo de execução: 80 ms
+ 
+Media dos tempos de execução: 1145100 ms
+ 
+Selection Sort
+M = 0
+Número de comparações: 445698416
+Número de trocas: 500000
+Tempo de execução: 1811949 ms
+ 
+M = 1
+Número de comparações: 891396832
+Número de trocas: 1000000
+Tempo de execução: 1945191 ms
+ 
+M = 2
+Número de comparações: 1337095248
+Número de trocas: 1500000
+Tempo de execução: 1783416 ms
+ 
+M = 3
+Número de comparações: 1782793664
+Número de trocas: 2000000
+Tempo de execução: 1528163 ms
+ 
+M = 4
+Número de comparações: -2066475216
+Número de trocas: 2500000
+Tempo de execução: 1495630 ms
+ 
+Media dos tempos de execução: 1712869 ms
+ 
+Merge Sort
+M = 0
+Número de comparações: 6222812
+Número de trocas: 9475712
+Tempo de execução: 8151820 ms
+ 
+M = 1
+Número de comparações: 12445624
+Número de trocas: 18951424
+Tempo de execução: 8065654 ms
+ 
+M = 2
+Número de comparações: 18668436
+Número de trocas: 28427136
+Tempo de execução: 4662364 ms
+ 
+M = 3
+Número de comparações: 24891248
+Número de trocas: 37902848
+Tempo de execução: 4696084 ms
+ 
+M = 4
+Número de comparações: 31114060
+Número de trocas: 47378560
+Tempo de execução: 4595461 ms
+ 
+Media dos tempos de execução: 6034276 ms
+ 
+Quick Sort
+M = 0
+Número de comparações: -988894239
+Número de trocas: 1269983
+Tempo de execução: 207490 ms
+ 
+M = 1
+Número de comparações: -1977788478
+Número de trocas: 2539966
+Tempo de execução: 208659 ms
+ 
+M = 2
+Número de comparações: 1328284579
+Número de trocas: 3809949
+Tempo de execução: 209489 ms
+ 
+M = 3
+Número de comparações: 339390340
+Número de trocas: 5079932
+Tempo de execução: 208790 ms
+ 
+M = 4
+Número de comparações: -649503899
+Número de trocas: 6349915
+Tempo de execução: 207420 ms
+ 
+Media dos tempos de execução: 208369 ms
+ 
+ ================================= 
+Número de registros analisados: 1000000
+ 
+Insertion Sort
+M = 0
+Número de comparações: 1738344176
+Número de trocas: 1738344176
+Tempo de execução: 10350660 ms
+ 
+M = 1
+Número de comparações: 1738344176
+Número de trocas: 1738344176
+Tempo de execução: 100 ms
+ 
+M = 2
+Número de comparações: 1738344176
+Número de trocas: 1738344176
+Tempo de execução: 102 ms
+ 
+M = 3
+Número de comparações: 1738344176
+Número de trocas: 1738344176
+Tempo de execução: 101 ms
+ 
+M = 4
+Número de comparações: 1738344176
+Número de trocas: 1738344176
+Tempo de execução: 98 ms
+ 
+Media dos tempos de execução: 2070212 ms
+ 
+Selection Sort
+M = 0
+Número de comparações: 1783293664
+Número de trocas: 1000000
+Tempo de execução: 9160191 ms
+ 
+M = 1
