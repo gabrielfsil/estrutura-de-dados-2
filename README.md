@@ -10,6 +10,15 @@ Para executar o programa execute o seguinte código na pasta do repositório:
 g++ *.cpp && ./a.out ./brazil_covid19_cities_processado.csv
 ```
 
+Ou 
+
+```
+g++ *.cpp && ./a.out ./brazil_covid19_cities.csv
+```
+Se quiser testar o Pré-Processamento
+
+O tempo de duração do Pré-Processamento dura aproximadamente no mínimo 4 minutos
+
 ## GIT TUTORIAL
 ### Primeira configuração
 
