@@ -6,18 +6,21 @@ Repositório usado para desenvolvimento do Trabalho Prático da disciplina DCC 0
 
 Para executar o programa execute o seguinte código na pasta do repositório:
 
+Linux:
 ```
 g++ *.cpp && ./a.out ./brazil_covid19_cities_processado.csv
 ```
 
-Ou 
-
+Windows:
 ```
-g++ *.cpp && ./a.out ./brazil_covid19_cities.csv
+g++ *.cpp 
+start a brazil_covid19_cities_processado.csv
 ```
-Se quiser testar o Pré-Processamento
+Troque o arquivo para brazil_covid19_cities.csv quand quiser testar o Pré-Processamento
 
-O tempo de duração do Pré-Processamento dura aproximadamente no mínimo 4 minutos
+A execução do programa leva diretamente ao módulo de testes.
+
+O tempo de duração do Pré-Processamento dura aproximadamente no mínimo 4 minutos.
 
 ## GIT TUTORIAL
 ### Primeira configuração
