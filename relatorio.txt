@@ -1,5 +1,0 @@
-Registros para análises dos algritmos: 50
-Tempo de leitura: 28451 ms
-Tempo de ordenação pré-processamento 130754 ms
-Tempo de cáluclo de total diário: 81338 ms
-Operção toda durou: 240543 ms 
