@@ -1,4 +1,0 @@
-Número de registros analisados: 1000000
- 
-Quick Sort
-M = 0
