@@ -32,9 +32,19 @@ void Ordena::quicksort(Registro vet[], int inicio, int fim)
 int Ordena::particionamento(Registro *vet, int inicio, int fim)
 {
 
-    // // Escolha do Pivô
-    // medianaDeTres(vet, inicio, fim);
-    // int pivo = fim;
+    // cout << "inicio: " << inicio <<  " valor: " << vet[inicio].getCasos() << 
+    // " | fim: " << fim  << " valor: "<< vet[fim].getCasos() << endl;
+
+    // cout << "Mediana de tres" << endl;
+    // // // Escolha do Pivô
+    medianaDeTres(vet, inicio, fim);
+    // cout << "inicio: " << inicio <<  " valor: " << vet[inicio].getCasos() << 
+    // " | fim: " << fim  << " valor: "<< vet[fim].getCasos() << endl;
+    
+    int pivo = fim;
+
+    cout<< "Indice pivo: [" << pivo << "] Valor pivo: " << vet[pivo].getCasos() << endl;
+
 
     // int i = inicio - 1;
 
@@ -55,9 +65,14 @@ int Ordena::particionamento(Registro *vet, int inicio, int fim)
 
     // return (i + 1);
         // Escolha do Pivô
-    int pivo = fim;
+   // int pivo = fim;
 
     int i = inicio - 1;
+      for(int k =0; k<=fim ; k++)
+    {
+        cout<< vet[k].getCasos() << "  ";
+    }
+    cout << endl;
 
     // Percorre o vetor até os indices se encontrarem
     for (int j = inicio; j <= fim - 1; j++)
@@ -71,6 +86,12 @@ int Ordena::particionamento(Registro *vet, int inicio, int fim)
     }
 
     troca(vet, i + 1, fim);
+
+    for(int k =0; k<=fim ; k++)
+    {
+        cout<< vet[k].getCasos() << "  ";
+    }
+    cout << endl;
     return (i + 1);
 }
 
@@ -79,6 +100,7 @@ void Ordena::medianaDeTres(Registro vet[], int inicio, int fim)
 
     int meio = (inicio + fim) / 2;
 
+    cout << "Meio indice: " << meio << " valor: " << vet[meio].getCasos() << endl;
     int casos_inicio = vet[inicio].getCasos();
     int casos_meio = vet[meio].getCasos();
     int casos_fim = vet[fim].getCasos();
@@ -122,6 +144,7 @@ void Ordena::medianaDeTres(Registro vet[], int inicio, int fim)
         }
     }
 
+    cout << "Mediana indice: " << mediana << " valor: " << vet[mediana].getCasos() << endl;
     troca(vet, mediana, fim);
     numTroca++;
 }
