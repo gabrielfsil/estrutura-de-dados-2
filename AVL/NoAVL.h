@@ -16,7 +16,6 @@ class NoAVL
     int getInfo();
     NoAVL* getDir();
     int getAltura();
-    int getFatorB();
     
   private:
     NoAVL* esq; // ponteiro para o filho a esquerda

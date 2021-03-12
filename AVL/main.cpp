@@ -8,19 +8,25 @@ int main()
     AVL * arv = new AVL();
 
     cout << "Criando Arvore AVL" << endl;
+
+     arv->insere(10);
+    arv->insere(20);
+    arv->insere(30);
+    arv->insere(40);
+    arv->insere(50);
+    arv->insere(25);
+    arv->insere(24);
+    arv->insere(6);
+    arv->insere(8);
     arv->insere(15);
     arv->insere(9);
     arv->insere(20);
     arv->insere(7);
     arv->insere(11);
     arv->insere(18);
-    arv->insere(24);
-    arv->insere(6);
-    arv->insere(8);
-    // arv->insere(10);
-    // arv->insere(12);
-    // arv->insere(17);
-    // arv->insere(19);
+    arv->insere(12);
+    arv->insere(17);
+    arv->insere(19);
     arv->imprime();
     cout << endl;
     arv->imprimeInOrdem();
@@ -29,6 +35,8 @@ int main()
     cout << "Busca o valor  5: " << arv->busca(5) << endl;
 
     cout << endl;
+
+    cout << "Comparacoes de chave feitas: " << arv->getComparacoes() << endl;
 
 
 

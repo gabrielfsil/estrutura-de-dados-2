@@ -47,13 +47,6 @@ NoAVL* NoAVL::getDir()
 }
 int NoAVL::getAltura()         
 {
-    if(this==NULL)
-        return 0;
     return altura; 
 }
-int NoAVL::getFatorB() 
-{ 
-    if (this == NULL) 
-    return 0; 
-    return this->getEsq()->getAltura() - this->getDir()->getAltura(); 
-} 
+

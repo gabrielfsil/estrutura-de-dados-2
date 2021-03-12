@@ -17,6 +17,7 @@ public:
     NoAVL * rotSDir(NoAVL *p);//rotação simples a direita
     NoAVL * rotDEsq(NoAVL *p);//rotação dupla a esquerda
     NoAVL * rotDDir(NoAVL *p);//rotação dupla a direita
+    int getComparacoes();
 
 
     //AVL* auxPreencheABB(AVL *a, int p, int q);
@@ -31,8 +32,8 @@ private:
     void imprimePorNivel(NoAVL* p, int nivel);
     void auxInOrdem(NoAVL *p);
     NoAVL* libera(NoAVL *p);
-    int altura(NoAVL *raiz);
     int h;
+    int comparacoes;
 
 
 

@@ -7,6 +7,7 @@ using namespace std;
 AVL::AVL()
 {
     raiz = NULL;
+    comparacoes=0;
 }
 
 
@@ -15,11 +16,27 @@ bool AVL::vazia()
     return raiz == NULL;
 }
 
+
+int altura(NoAVL *p)
+
+{
+    if(p==NULL)
+        return -1;
+    return p->getAltura();
+}
+
+int balancemento(NoAVL *p) 
+{ 
+    if (p == NULL) 
+        return 0; 
+    return altura(p->getDir()) - altura(p->getEsq()); 
+} 
+
 int maior (NoAVL *p, NoAVL *q)
 {
-    if(p->getAltura()>q->getAltura())
-        return p->getAltura();
-    return q->getAltura();
+    if(altura(p)>altura(q))
+        return altura(p);
+    return altura(q);
 }
 
 void AVL::insere(int chave)
@@ -27,9 +44,9 @@ void AVL::insere(int chave)
     raiz = auxInsere(raiz, chave);
 }
 
-
 NoAVL* AVL::auxInsere(NoAVL *p, int chave)
 {
+    cout << "tentando inserir " << chave <<endl;
     if(p == NULL)
     {
         p = new NoAVL();
@@ -39,34 +56,61 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
         p->setAltura(0);
         return p;
     }
-    else if(chave < p->getInfo())
-        p->setEsq(auxInsere(p->getEsq(), chave));
-    else 
-        p->setDir(auxInsere(p->getDir(), chave));
+    else{
+
+        cout << "raiz = "<< p->getInfo() <<endl;
+        cout << "altura = " << altura(p) <<endl;
+
+        cout << "chave= " << chave << endl;
+
+        comparacoes++;
+        if(chave < p->getInfo()){
+            cout << "insere na esquerda" <<endl;
+            p->setEsq(auxInsere(p->getEsq(), chave));
+
+        }
+        else {
+            cout << "insere na direita" <<endl;
+            p->setDir(auxInsere(p->getDir(), chave));
+
+        }
+
+    } 
     
     //atualiza altura do no
     p->setAltura(1+maior(p->getDir(), p->getEsq()));
+    cout << "altura atualizada de " << p->getInfo() << " = " << altura(p) <<endl;
 
 
-    int fatorB = p->getFatorB();
+     int fatorB = balancemento(p);
+     cout << "fator de balanceamento de " << p->getInfo() << "= "<< fatorB <<endl;
 
     //rotação simples a esqurda
         //se F(p) igual a 2 Q = nó a diretia
-    if(fatorB==2)
+    if(fatorB ==2)
     {
-        NoAVL * q = p->getEsq();
-        if((q->getFatorB() == 1) || (q->getFatorB() == 0))//se f(q) == 1 ou 0
+        NoAVL * q = p->getDir();
+        if((balancemento(q)== 1) || (balancemento(q) == 0)){//se f(q) == 1 ou 0
+            cout << "rotação simples a esquerda na chave " << p->getInfo() << endl;
             return rotSEsq(p); //rotação simples a esquerda
-        if(q->getFatorB() == -1)//se f(q) == -1 
+        }
+        if(balancemento(q) == -1){//se f(q) == -1 
+            cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
+
             return rotDEsq(p); //rotação dupla a esquerda
+        }
     }
-    if(fatorB==-2)
+    if(fatorB == -2)
     {
         NoAVL * q = p->getEsq();
-        if((q->getFatorB() == -1) || (q->getFatorB() == 0))//se f(q) == -1 ou 0
+        if((balancemento(q) == -1) || (balancemento(q) == 0)){//se f(q) == -1 ou 0
+            cout << "rotacao simples a direita na chave " << p->getInfo() << endl;
             return rotSDir(p); //rotação simples a direita
-        if(q->getFatorB() == 1)//se f(q) == 1 
-            return rotDEsq(p); //rotação dupla a direita
+        }
+        if(balancemento(q) == 1){//se f(q) == 1 
+            cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
+            return rotDDir(p); //rotação dupla a direita
+        }
     }
 
     return p;
@@ -82,17 +126,25 @@ bool AVL::auxBusca(NoAVL *p, int chave)
 {
     if(p == NULL)
         return false;
-    else if(p->getInfo() == chave)
+    else{
+        comparacoes++;
+     if(p->getInfo() == chave)
         return true;
-    else if(chave < p->getInfo())
-        return auxBusca(p->getEsq(), chave);
-    else
-        return auxBusca(p->getDir(), chave);
+
+        else {
+            comparacoes++;
+            if(chave < p->getInfo())
+            return auxBusca(p->getEsq(), chave);
+        else
+            return auxBusca(p->getDir(), chave);
+        }
+    }
 }
 
 NoAVL * AVL::rotSEsq(NoAVL *p)
 {
     NoAVL * q = p->getDir();
+    
     p->setDir(q->getEsq());
     q->setEsq(p);
     p->setAltura(1+maior(p->getDir(), p->getEsq()));
@@ -188,6 +240,10 @@ void AVL::auxInOrdem(NoAVL *p)
     } 
 } 
 
+int AVL::getComparacoes()
+{
+    return comparacoes;
+}
 // int altura(NoAVL * p)
 //     {
 //       int hesq, hdir;
