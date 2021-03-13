@@ -466,6 +466,7 @@ int main(int argc, char *argv[])
                 if (n > 20)
                 {
                     // Saída em arquivo
+                    arvAVL->imprimeArquivo("saida-modulo-de-teste-AVL.txt");
                 }
                 else
                 {
