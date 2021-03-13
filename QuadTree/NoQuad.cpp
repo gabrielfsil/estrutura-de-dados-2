@@ -1,5 +1,5 @@
 #include "NoQuad.h"
-#include "Registro.h"
+#include "Cidade.h"
 #include <string>
 #include <stdlib.h>
 
@@ -57,11 +57,11 @@ NoQuad *NoQuad::getSW()
     return SW ;
 }
 
-void NoQuad::setInfo(Registro *registro) 
+void NoQuad::setInfo(Cidade *Cidade) 
 { 
-    info = registro; 
+    info = Cidade; 
 }
-Registro * NoQuad::getInfo() 
+Cidade * NoQuad::getInfo() 
 { 
     return info; 
 }

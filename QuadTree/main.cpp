@@ -41,7 +41,7 @@ int leArquivo(QuadTree * arvore, string fileDirectory)
 
     if (myfile.is_open())
     {
-        cout << "Inserido registros na árvore... " <<endl;
+        cout << "Inserido cidades na árvore... " <<endl;
 
         while (!myfile.eof())
         {
@@ -49,27 +49,27 @@ int leArquivo(QuadTree * arvore, string fileDirectory)
             //Pula a primeira linha
             if (i != 0)
             {
-                //Cria um novo registro e um novo nós
-                 Registro * registro = new Registro();
+                //Cria um novo cidade e um novo nós
+                Cidade * cidade = new Cidade();
                 //  NoArv * p = new NoArv();
 
                 //Divide as informações da linha em vetores de string
-                //esses são os dados que constituirão o registro
+                //esses são os dados que constituirão o cidade
                 split(line, ',', dados);
                 
-                registro->setCodEstado(stoi(dados[0]));
-                registro->setCodCidade(stoi(dados[1]));
-                registro->setNomeCidade(dados[2]);
-                registro->setLat(stof(dados[3]));
-                registro->setLon(stof(dados[4]));
-                registro->setCapital(dados[5]);
+                cidade->setCodEstado(stoi(dados[0]));
+                cidade->setCodCidade(stoi(dados[1]));
+                cidade->setNomeCidade(dados[2]);
+                cidade->setLat(stof(dados[3]));
+                cidade->setLon(stof(dados[4]));
+                cidade->setCapital(dados[5]);
                             
                 //Limpa o vetor dos dados da linha para reuso
                 dados.clear();
 
 
-                //Insere o registro na árvore
-                arvore->insere(registro);
+                //Insere o cidade na árvore
+                arvore->insere(cidade);
 
             }
             i++;
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
     //-2.0, -0.0, - 0.7, -50.0
     //-30.0, -51.0, -10.0, -30.0
 
-    vector <Registro*> cidades = arv->buscaRange(-1.2, -50.0, - 0.9, -30.0);
+    vector <Cidade*> cidades = arv->buscaRange(-1.2, -50.0, - 0.9, -30.0);
    // cout << "De volta a main" << endl;
 
    // cout  << cidades.size() << endl;

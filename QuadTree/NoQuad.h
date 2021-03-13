@@ -1,6 +1,6 @@
 #ifndef NoQuad_H
 #define NoQuad_H
-#include "Registro.h"
+#include "Cidade.h"
 
 
 class NoQuad
@@ -16,8 +16,8 @@ class NoQuad
     NoQuad * getSE();
     void setSW(NoQuad *p);
     NoQuad * getSW();
-    void setInfo(Registro *registro);
-    Registro * getInfo();
+    void setInfo(Cidade *Cidade);
+    Cidade * getInfo();
     void setX(float X);
     float getX();
     void setY(float Y);
@@ -31,7 +31,7 @@ class NoQuad
     NoQuad* NW; // nó sudodeste
     NoQuad* SE; // nó sudeste
     NoQuad* SW; // nó sudoeste
-    Registro * info;  // informacao do nó
+    Cidade * info;  // informacao do nó
     float X;
     float Y;
 };

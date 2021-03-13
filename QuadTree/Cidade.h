@@ -1,15 +1,15 @@
-#ifndef REGISTRO_H
-#define REGISTRO_H
+#ifndef Cidade_H
+#define Cidade_H
 #include <string>
 #include <stdlib.h>
 
 using namespace std;
 
-class Registro{
+class Cidade{
 
     public:
-        Registro();
-        ~Registro();
+        Cidade();
+        ~Cidade();
         void setCodEstado(int codEstado);
         void setCodCidade(int codCidade);
         void setNomeCidade(string nomeCidade);
@@ -35,4 +35,4 @@ class Registro{
         
 };
 
-#endif // REGISTRO_H
+#endif // Cidade_H

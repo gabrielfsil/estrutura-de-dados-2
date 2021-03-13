@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 #include <stdlib.h>
 #include "QuadTree.h"
-#include "Registro.h"
+#include "Cidade.h"
 
 using namespace std;
 
@@ -18,32 +18,32 @@ bool QuadTree::vazia()
 }
 
 //Retorna o quadrante Q onde P está localizado no quadrante enraizado por R
-int quadtree_compare(NoQuad * p, Registro * registro)
+int quadtree_compare(NoQuad * p, Cidade * cidade)
 {
     // cout << "raiz: "<< p->getX() << " , " << p->getY()<< endl;
-    // cout << "registro: " << registro->getLat() << " , " << registro->getLon()<< endl;
+    // cout << "Cidade: " << cidade->getLat() << " , " << cidade->getLon()<< endl;
 
-    if(registro->getLat() < p->getX())
+    if(cidade->getLat() < p->getX())
     {
-        if(registro->getLon() < p->getY())
+        if(cidade->getLon() < p->getY())
             return 3; //SW;
         else    
             return 2; // NW;
 
-    }else if(registro->getLon() < p->getY())
+    }else if(cidade->getLon() < p->getY())
             return 4 ;// SE;
         else
             return 1 ;// NE;
     
 }
 
-void QuadTree::insere(Registro * registro){
+void QuadTree::insere(Cidade * cidade){
     
-    raiz = auxInsere(raiz, registro);
+    raiz = auxInsere(raiz, cidade);
 
 }
 
-NoQuad * QuadTree::auxInsere(NoQuad * P, Registro * registro)
+NoQuad * QuadTree::auxInsere(NoQuad * P, Cidade * cidade)
 {
     //Ponteiro Pai aponta para Raiz
     NoQuad * PAI ;
@@ -52,33 +52,33 @@ NoQuad * QuadTree::auxInsere(NoQuad * P, Registro * registro)
     if(P == NULL) //Arvore vazia
     {
         P = new NoQuad();
-        P->setInfo(registro);
-        P->setX(registro->getLat());
-        P->setY(registro->getLon());
+        P->setInfo(cidade);
+        P->setX(cidade->getLat());
+        P->setY(cidade->getLon());
 
 
     }
-    else if ((P->getX() != registro->getLat()) && (P->getY() != registro->getLon()))
+    else if ((P->getX() != cidade->getLat()) && (P->getY() != cidade->getLon()))
     {
-        Q = quadtree_compare(P,registro);
+        Q = quadtree_compare(P,cidade);
 
         switch( Q)
         {
             case 1:
-                P->setNE(auxInsere(P->getNE(), registro));
+                P->setNE(auxInsere(P->getNE(), cidade));
                 // cout << "NE da raiz: " << P->getNE()->getInfo()->getNomeCidade() << endl;
 
                 break;
             case 2:
-                P->setNW(auxInsere(P->getNW(), registro));
+                P->setNW(auxInsere(P->getNW(), cidade));
                 // cout << "NW da raiz: " << P->getNW()->getInfo()->getNomeCidade() << endl;
                 break;
             case 3:
-                P->setSW(auxInsere(P->getSW(), registro));
+                P->setSW(auxInsere(P->getSW(), cidade));
                 // cout << "SW da raiz: " << P->getSW()->getInfo()->getNomeCidade() << endl;
                 break;
             case 4:
-                P->setSE(auxInsere(P->getSE(), registro));
+                P->setSE(auxInsere(P->getSE(), cidade));
                 // cout << "SE da raiz: " <<P->getSE()->getInfo()->getNomeCidade() << endl;
                 break;
             default:
@@ -103,9 +103,9 @@ bool QuadTree::busca(float X, float  Y)
     return auxBusca(raiz, X, Y);
 }
 
-vector <Registro*> QuadTree::buscaRange(float x0, float y0, float x1, float y1)
+vector <Cidade*> QuadTree::buscaRange(float x0, float y0, float x1, float y1)
 {
-    vector <Registro*> cidades;
+    vector <Cidade*> cidades;
     auxBuscaRange(raiz, &cidades, x0, y0, x1, y1);
     return cidades;
 }
@@ -118,7 +118,7 @@ bool isInRange(NoQuad *p, float x0, float y0, float x1, float y1)
     return false;
 }
 
-vector <Registro*> QuadTree::auxBuscaRange(NoQuad *p, vector <Registro*> * cidades, float x0, float y0, float x1, float y1){
+vector <Cidade*> QuadTree::auxBuscaRange(NoQuad *p, vector <Cidade*> * cidades, float x0, float y0, float x1, float y1){
 
     if(p != NULL){
 
@@ -146,15 +146,15 @@ bool QuadTree::auxBusca(NoQuad *p, float X, float Y)
     //Se a árvore está vazia retorna falso
     if(p == NULL)
         return false;
-    //Senão, se as coordenadas do nó forem iguais as coordenadas do registro que buscamos:
+    //Senão, se as coordenadas do nó forem iguais as coordenadas do Cidade que buscamos:
     if((p->getX() == X )&& (p->getY() ==Y))
         //retornamos true
         return true;
-    //Senão, se a coordenada X do registro buscado estiver a esquerda da raiz:
+    //Senão, se a coordenada X do Cidade buscado estiver a esquerda da raiz:
     if(X < p->getX())
     {
         //checamos a coordenada Y
-        //Se a coordenada Y do registro buscado estiver a baixo da raiz:
+        //Se a coordenada Y do Cidade buscado estiver a baixo da raiz:
         if(Y < p->getY())
             //Busca a partir do nó SW
             return auxBusca(p->getSW(), X, Y);
@@ -163,7 +163,7 @@ bool QuadTree::auxBusca(NoQuad *p, float X, float Y)
             return auxBusca(p->getNW(), X, Y);
 
     }
-    //Senão,a coordenada X do registro que buscamos está a direita da raiz então checamos
+    //Senão,a coordenada X do Cidade que buscamos está a direita da raiz então checamos
     //se a coordenada Y está abaixo da raiz
     else if(Y < p->getY())
         //Se sim buscamos a partir do nó SE
