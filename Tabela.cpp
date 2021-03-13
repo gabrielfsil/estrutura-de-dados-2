@@ -38,7 +38,7 @@ long int Tabela::hash2(long int k)
     return (k % mLinha) + 1;
 }
 
-bool Tabela::insere(Registro registro)
+long int Tabela::insere(Registro registro)
 {
 
     int i = 0;
@@ -54,7 +54,7 @@ bool Tabela::insere(Registro registro)
         {
 
             registros[posicao] = registro;
-            return true;
+            return posicao;
         }
 
         i++;
@@ -62,7 +62,7 @@ bool Tabela::insere(Registro registro)
     }
 
     erros++;
-    return false;
+    return -1;
 }
 
 long int Tabela::agrupaChave(int codigo, Data data)

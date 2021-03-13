@@ -23,7 +23,7 @@ class Tabela
         Tabela(int m);
         ~Tabela();
         long int hash(long int k, int i);
-        bool insere(Registro registro);
+        long int insere(Registro registro);
         Registro busca(int codigo, string data);
         Registro buscaPorPosicao(long int posicao);
         string imprimir();
