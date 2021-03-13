@@ -119,3 +119,20 @@ string Tabela::imprimir()
 
     return saida;
 }
+
+int Tabela::totalDeCasos(int codigo)
+{
+
+    int total = 0;
+    
+    for(int i = 0; i < m; i++)
+    {   
+        if(registros[i].getCodigo() == codigo)
+        {
+            total += registros[i].getCasos();
+        }
+
+    }
+
+    return total;    
+}

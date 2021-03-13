@@ -28,6 +28,7 @@ class Tabela
         Registro buscaPorPosicao(long int posicao);
         string imprimir();
         void escrever(string path);
+        int totalDeCasos(int codigo);
 };
 
 #endif // TABELA_H

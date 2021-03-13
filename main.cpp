@@ -556,9 +556,7 @@ int main(int argc, char *argv[])
 
             cout << "Inserindo valores nas estruturas..." << endl;
 
-            
             // Inserir na estrutura
-            
 
             cout << "Inserção concluída!" << endl;
         }
@@ -577,7 +575,7 @@ int main(int argc, char *argv[])
              << endl
              << endl
              << "Escolha uma das opções abaixo:" << endl
-             << "[1] Buscar total de casos em uma cidade." << endl
+             << "[1] Obter total de casos em uma cidade." << endl
              << "[2] Obter total de casos em uma região" << endl
              << endl
              << "[3] Sair da Análise" << endl
@@ -590,10 +588,35 @@ int main(int argc, char *argv[])
         {
         case 1:
         {
+            cout << endl
+                 << "Digite o código da cidade que deseja obter o total de casos: ";
+            int codigo;
+            cin >> codigo;
+
+            int total = tabela->totalDeCasos(codigo);
+
+            cout << endl
+                 << "Total de Casos: " << total << endl;
         }
         break;
         case 2:
         {
+            cout << endl
+                 << "Digite o intervalo da região que deseja obter o total de casos: " << endl
+                 << "[ ( x0 , y0 ) , ( x1 , y1 ) ]" << endl;
+            int x0, y0, x1, y1;
+            cout << " x0: ";
+            cin >> x0;
+            cout << " y0: ";
+            cin >> y0;
+            cout << " x1: ";
+            cin >> x1;
+            cout << " y1: ";
+            cin >> y1;
+
+            cout << endl
+                 << "Intervalo escolhido: "
+                 << "[(" << x0 << " , " << y0 << "),(" << x1 << " , " << y1 << ")]" << endl;
         }
         break;
 
