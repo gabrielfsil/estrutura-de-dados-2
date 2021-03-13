@@ -12,6 +12,8 @@
 #include "Ordena.h"
 #include "Tabela.h"
 #include "QuadTree.h"
+#include "AVL.h"
+#include "ArvB.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -339,7 +341,7 @@ int leArquivo(QuadTree *arvore, string path, int tamanho)
                 if (i >= tamanho)
                 {
 
-                    return;
+                    return tamanho;
                 }
             }
             i++;
@@ -386,7 +388,7 @@ int main(int argc, char *argv[])
             switch (opcao)
             {
             case 1:
-                // Insere N cidades na Quad Tree
+            { // Insere N cidades na Quad Tree
                 QuadTree *arv = new QuadTree();
 
                 cout << "Lendo arquivo..." << endl;
@@ -397,14 +399,19 @@ int main(int argc, char *argv[])
                 if (n > 20)
                 {
                     // Saída em arquivo
+                    arv->imprimeArquivo("saida-modulo-de-teste-quadtree.txt");
                 }
                 else
                 {
                     // Saída no console
+                    arv->imprime();
                 }
-                break;
+
+                delete arv;
+            }
+            break;
             case 2:
-                // Insere N registros na Tabela Hash
+            { // Insere N registros na Tabela Hash
                 Tabela *tabela = new Tabela(n * 15);
 
                 cout << "Lendo arquivo..." << endl;
@@ -432,14 +439,76 @@ int main(int argc, char *argv[])
                 }
 
                 delete tabela;
-                break;
+            }
+            break;
             case 3:
+            {
+
                 // Insere N chaves na Árvore AVL
-                break;
+
+                AVL *arvAVL = new AVL();
+
+                cout << "Criando Arvore AVL" << endl;
+
+                int i = 0;
+
+                srand(time(NULL));
+                while (i < n)
+                {
+                    int num = rand() % n;
+
+                    arvAVL->insere(num);
+
+                    i++;
+                }
+
+                // Imprimi saída
+                if (n > 20)
+                {
+                    // Saída em arquivo
+                }
+                else
+                {
+                    // Saída no console
+                    arvAVL->imprime();
+                }
+                delete arvAVL;
+            }
+            break;
             case 4:
-                // Insere N chaves na Árvore B
-                break;
+            { // Insere N chaves na Árvore B
+                int m = 3;
+                ArvB *arvB = new ArvB(m);
+
+                cout << "Criando Arvore B" << endl;
+                cout << "Grau Mínimo: 3" << endl;
+
+                int i = 0;
+
+                srand(time(NULL));
+                while (i < n)
+                {
+                    int num = rand() % n;
+
+                    arvB->insere(num);
+
+                    i++;
+                }
+                // Imprimi saída
+                if (n > 20)
+                {
+                    // Saída em arquivo
+                }
+                else
+                {
+                    // Saída no console
+                    arvB->imprime();
+                }
+                delete arvB;
+            }
+            break;
             default:
+                cout << "Comando não encontrado! Tente novamente." << endl;
                 break;
             }
         }

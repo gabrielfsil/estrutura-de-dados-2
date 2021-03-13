@@ -46,7 +46,7 @@ void AVL::insere(int chave)
 
 NoAVL* AVL::auxInsere(NoAVL *p, int chave)
 {
-    cout << "tentando inserir " << chave <<endl;
+    // cout << "tentando inserir " << chave <<endl;
     if(p == NULL)
     {
         p = new NoAVL();
@@ -58,19 +58,19 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
     }
     else{
 
-        cout << "raiz = "<< p->getInfo() <<endl;
-        cout << "altura = " << altura(p) <<endl;
+        // cout << "raiz = "<< p->getInfo() <<endl;
+        // cout << "altura = " << altura(p) <<endl;
 
-        cout << "chave= " << chave << endl;
+        // cout << "chave= " << chave << endl;
 
         comparacoes++;
         if(chave < p->getInfo()){
-            cout << "insere na esquerda" <<endl;
+            // cout << "insere na esquerda" <<endl;
             p->setEsq(auxInsere(p->getEsq(), chave));
 
         }
         else {
-            cout << "insere na direita" <<endl;
+            // cout << "insere na direita" <<endl;
             p->setDir(auxInsere(p->getDir(), chave));
 
         }
@@ -79,11 +79,11 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
     
     //atualiza altura do no
     p->setAltura(1+maior(p->getDir(), p->getEsq()));
-    cout << "altura atualizada de " << p->getInfo() << " = " << altura(p) <<endl;
+    // cout << "altura atualizada de " << p->getInfo() << " = " << altura(p) <<endl;
 
 
      int fatorB = balancemento(p);
-     cout << "fator de balanceamento de " << p->getInfo() << "= "<< fatorB <<endl;
+    //  cout << "fator de balanceamento de " << p->getInfo() << "= "<< fatorB <<endl;
 
     //rotação simples a esqurda
         //se F(p) igual a 2 Q = nó a diretia
@@ -91,11 +91,11 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
     {
         NoAVL * q = p->getDir();
         if((balancemento(q)== 1) || (balancemento(q) == 0)){//se f(q) == 1 ou 0
-            cout << "rotação simples a esquerda na chave " << p->getInfo() << endl;
+            // cout << "rotação simples a esquerda na chave " << p->getInfo() << endl;
             return rotSEsq(p); //rotação simples a esquerda
         }
         if(balancemento(q) == -1){//se f(q) == -1 
-            cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
+            // cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
 
             return rotDEsq(p); //rotação dupla a esquerda
         }
@@ -104,11 +104,11 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
     {
         NoAVL * q = p->getEsq();
         if((balancemento(q) == -1) || (balancemento(q) == 0)){//se f(q) == -1 ou 0
-            cout << "rotacao simples a direita na chave " << p->getInfo() << endl;
+            // cout << "rotacao simples a direita na chave " << p->getInfo() << endl;
             return rotSDir(p); //rotação simples a direita
         }
         if(balancemento(q) == 1){//se f(q) == 1 
-            cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
+            // cout << "rotação dupla a esquerda na chave " << p->getInfo() << endl;
             return rotDDir(p); //rotação dupla a direita
         }
     }

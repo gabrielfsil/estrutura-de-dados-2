@@ -95,6 +95,11 @@ Registro Tabela::busca(int codigo, string data)
     return Registro();
 }
 
+Registro Tabela::buscaPorPosicao(long int posicao)
+{
+    return registros[posicao];
+}
+
 string Tabela::imprimir()
 {
 
