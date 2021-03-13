@@ -8,6 +8,8 @@ ArvB::ArvB(int m)
 {
     raiz = NULL;
     this->m = m;//grau minimo
+    comparacoes=0;
+
 }
 
 ArvB::~ArvB()
@@ -20,6 +22,10 @@ int ArvB::getM()
     return m;
 }
 
+int ArvB::getComparacoes()
+{
+    return comparacoes;
+}
 bool ArvB::vazia()
 {
     return raiz == NULL;
@@ -42,42 +48,46 @@ NoArvB* ArvB::auxInsere(NoArvB *p, int chave)
         raiz = p;
 
   }
-  else if(p->getN() == (2*m-1))//se não há espaço para chaves no nó
-  {
-     // cout <<  "numero de chaves no no: " << p->getN() << endl;
-      //cout << "No cheio!" << endl;
-       //cria no para ser a nova raiz
-        NoArvB * q = new NoArvB(m, false); 
+  else {
+        comparacoes++;
+        if(p->getN() == (2*m-1))//se não há espaço para chaves no nó
+        {
+            // cout <<  "numero de chaves no no: " << p->getN() << endl;
+            //cout << "No cheio!" << endl;
+            //cria no para ser a nova raiz
+                NoArvB * q = new NoArvB(m, false); 
 
-        //raiz antiga p vira filha da nova raiz q
+                //raiz antiga p vira filha da nova raiz q
 
-       // cout << "no p (raiz antiga) vira filho do no q" <<endl;
-        q->getFilhos()[0] = p;
+            // cout << "no p (raiz antiga) vira filho do no q" <<endl;
+                q->getFilhos()[0] = p;
 
-        //fazemos cisão na raiz antiga p e movemos uma chave para a nova raiz q
+                //fazemos cisão na raiz antiga p e movemos uma chave para a nova raiz q
 
-        //cout << "cisao no no p e movendo chave para q" << endl;
-        q->cisao(0,p);
+                //cout << "cisao no no p e movendo chave para q" << endl;
+                q->cisao(0,p);
 
-        //a nova raiz tem dois filhos, agora definimos ual filho receberá a chave
-        int i =0;
+                //a nova raiz tem dois filhos, agora definimos ual filho receberá a chave
+                int i =0;
 
-       // cout << "q->chaves[0] = " << q->getChaves()[0] <<endl;
-        if(q->getChaves()[0] < chave)
-            i++;
-        
-        // cout << "inserindo em q->filhos[" << i <<"]" << endl;
-        insereComEspaco(q->getFilhos()[i], chave);
+                // cout << "q->chaves[0] = " << q->getChaves()[0] <<endl;
+                comparacoes++;
+                if(q->getChaves()[0] < chave)
+                    i++;
+                
+                // cout << "inserindo em q->filhos[" << i <<"]" << endl;
+                insereComEspaco(q->getFilhos()[i], chave);
 
-        p = q;
-    
-  }else {
-        
-    //   cout <<  "numero de chaves no no: " << p->getN() << endl;
-    //   cout << "Tem espaço!" << endl;
-      insereComEspaco(p, chave);
+                p = q;
+            
+        }else {
+                
+            //   cout <<  "numero de chaves no no: " << p->getN() << endl;
+            //   cout << "Tem espaço!" << endl;
+            insereComEspaco(p, chave);
 
-  }
+        }
+    }
 
     return p;
 
@@ -93,10 +103,13 @@ void ArvB::insereComEspaco(NoArvB * p, int chave)
         {
             //procura o local correto para inserção do nó
             //enquanto move as chaves menores para frente
+            comparacoes++;
              while ((i >= 0) && (p->getChaves()[i] > chave)) 
             { 
                     p->getChaves()[i+1] = p->getChaves()[i]; 
                     i--; 
+                    comparacoes++;
+
             } 
             // cout << "inserindo chave " << chave << endl;
             //insere a chave no local encontrado
@@ -105,13 +118,17 @@ void ArvB::insereComEspaco(NoArvB * p, int chave)
             
         }//se o nó não é folha procuramos o filho que pode receber a chave
         else{
-            while((i >= 0) && (p->getChaves()[i] > chave))
+            comparacoes++;
+            while((i >= 0) && (p->getChaves()[i] > chave)){
+                comparacoes++;
                 i--;
+            }
+            comparacoes++;
             if(p->getFilhos()[i+1]->getN() == (2*m-1)) //se o filho estiver cheio
             {
                 //faz a cisão do nó
                 p->cisao(i+1, p->getFilhos()[i+1]);
-
+                comparacoes++;
                 if(p->getChaves()[i+1]<chave)
                     i++;
             }
@@ -129,8 +146,12 @@ NoArvB * ArvB::busca(int chave)
 NoArvB * ArvB::auxBusca(NoArvB *p, int chave)
 {
     int i =0;
-    while((i<p->getN()) && (p->getChaves()[i]<chave))
+    comparacoes++;
+    while((i<p->getN()) && (p->getChaves()[i]<chave)){
+        comparacoes++;
         i++;
+    }
+    comparacoes++;
     if(p->getChaves()[i]==chave)
         return p;
     if(p->ehFolha())
@@ -147,19 +168,16 @@ void ArvB::imprime()
 
 void ArvB::auxImprime(NoArvB *p)
 {
-       // There are n keys and n+1 children, traverse through n keys 
-    // and first n children 
+      
     int i; 
     for (i = 0; i < p->getN(); i++) 
     { 
-        // If this is not leaf, then before printing key[i], 
-        // traverse the subtree rooted with child C[i]. 
+       
         if (p->ehFolha() == false) 
             auxImprime(p->getFilhos()[i]); 
         cout << " " << p->getChaves()[i]; 
     } 
   
-    // Print the subtree rooted with last child 
     if (p->ehFolha() == false) 
         auxImprime(p->getFilhos()[i]);
 

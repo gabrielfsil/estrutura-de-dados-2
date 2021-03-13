@@ -25,6 +25,7 @@ int main()
     arv->insere(19);
     arv->imprime();
 
+    cout << "Comparacoes: " << arv->getComparacoes() << endl;
 
 
     cout << "Busca o valor 20: ";

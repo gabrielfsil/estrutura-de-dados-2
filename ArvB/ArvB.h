@@ -13,6 +13,8 @@ public:
     void imprime();
     int getM();
     int getN();
+    int getComparacoes();
+
 
    // void preencheABB(ArvB *a, int p, int q);
     //NoArvB* auxPreencheABB(NoArvB *a, int p, int q);
@@ -30,6 +32,7 @@ private:
     int n;
     void insereComEspaco(NoArvB *p, int chave);
     NoArvB * cisao(NoArvB * p);
+    int comparacoes;
 
 
 
