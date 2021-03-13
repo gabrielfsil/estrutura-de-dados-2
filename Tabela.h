@@ -28,6 +28,7 @@ class Tabela
         Registro buscaPorPosicao(long int posicao);
         string imprimir();
         void escrever(string path);
+        Registro * getRegistros() { return registros;}
 };
 
 #endif // TABELA_H

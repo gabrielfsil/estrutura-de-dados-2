@@ -1,5 +1,9 @@
 #include <iostream>
 #include "AVL.h"
+#include "Registro.h"
+#include "Tabela.h"
+#include "Data.h"
+
 
 using namespace std;
 
@@ -39,12 +43,21 @@ int maior (NoAVL *p, NoAVL *q)
     return altura(q);
 }
 
-void AVL::insere(int chave)
+long int agrupaChave(int codigo, Data data)
 {
-    raiz = auxInsere(raiz, chave);
+
+    return codigo + ((10000 * data.getAno()) + (100 * data.getMes()) + data.getDia());
 }
 
-NoAVL* AVL::auxInsere(NoAVL *p, int chave)
+void AVL::insere(long int chave,Tabela * tabela)
+{
+    raiz = auxInsere(raiz, chave, tabela);
+}
+
+
+//Função auxiliar de inserção na árvore recebendo como parâmetro a raiz, a chave e a tabela hash
+//A chave da árvore é o hash dado pelo par codigo e data, que é a posição na tabela hash
+NoAVL* AVL::auxInsere(NoAVL *p, long int chave, Tabela * tabela)
 {
     // cout << "tentando inserir " << chave <<endl;
     if(p == NULL)
@@ -63,15 +76,29 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
 
         // cout << "chave= " << chave << endl;
 
+        //Busca o registro dado pela chave
+        Registro regC = tabela->buscaPorPosicao(chave);
+
+        //Transforma o codigo e data do registro em um inteiro que concatena as duas informações
+        //Usaremos esse valor para comparação
+        int valC = agrupaChave(regC.getCodigo(), regC.getData());
+
+        //Fazemos o mesmo com o a chave da raiz
+        //Busca o registro dado pela chave do no p
+        Registro regP = tabela->buscaPorPosicao(p->getInfo());
+
+        int valP = agrupaChave(regP.getCodigo(), regP.getData());
+
         comparacoes++;
-        if(chave < p->getInfo()){
+
+        if(valC< valP){
             // cout << "insere na esquerda" <<endl;
-            p->setEsq(auxInsere(p->getEsq(), chave));
+            p->setEsq(auxInsere(p->getEsq(), chave, tabela));
 
         }
         else {
             // cout << "insere na direita" <<endl;
-            p->setDir(auxInsere(p->getDir(), chave));
+            p->setDir(auxInsere(p->getDir(), chave,tabela));
 
         }
 
@@ -117,12 +144,12 @@ NoAVL* AVL::auxInsere(NoAVL *p, int chave)
 
 }
 
-bool AVL::busca(int chave)
+bool AVL::busca(long int chave, Tabela * tabela)
 {
-    return auxBusca(raiz, chave);
+    return auxBusca(raiz, chave, tabela);
 }
 
-bool AVL::auxBusca(NoAVL *p, int chave)
+bool AVL::auxBusca(NoAVL *p, long int chave, Tabela * tabela)
 {
     if(p == NULL)
         return false;
@@ -132,11 +159,24 @@ bool AVL::auxBusca(NoAVL *p, int chave)
         return true;
 
         else {
+                //Busca o registro dado pela chave
+            Registro regC = tabela->buscaPorPosicao(chave);
+
+            //Transforma o codigo e data do registro em um inteiro que concatena as duas informações
+            //Usaremos esse valor para comparação
+            int valC = agrupaChave(regC.getCodigo(), regC.getData());
+
+            //Fazemos o mesmo com o a chave da raiz
+            //Busca o registro dado pela chave do no p
+            Registro regP = tabela->buscaPorPosicao(p->getInfo());
+
+            int valP = agrupaChave(regP.getCodigo(), regP.getData());
+
             comparacoes++;
-            if(chave < p->getInfo())
-            return auxBusca(p->getEsq(), chave);
+            if(valC< valP)
+            return auxBusca(p->getEsq(), chave, tabela);
         else
-            return auxBusca(p->getDir(), chave);
+            return auxBusca(p->getDir(), chave, tabela);
         }
     }
 }
@@ -207,36 +247,39 @@ NoAVL* AVL::libera(NoAVL *p)
     }
     return p;
 }
-void AVL::imprime()
+void AVL::imprime(Tabela * tabela)
 {
-    imprimePorNivel(raiz, 0);
+    imprimePorNivel(raiz, 0, tabela);
 }
 
-void AVL::imprimePorNivel(NoAVL *p, int nivel)
+void AVL::imprimePorNivel(NoAVL *p, int nivel, Tabela * tabela)
 {
     if(p != NULL)
     {
         cout << "(" << nivel << ")";
         for(int i = 1; i <= nivel; i++)
             cout << "--";
-        cout << p->getInfo() << endl;
-        imprimePorNivel(p->getEsq(), nivel+1);
-        imprimePorNivel(p->getDir(), nivel+1);
+
+        Registro regP = tabela->buscaPorPosicao(p->getInfo());
+        cout<< regP.getCodigo() << " | " << regP.getDataStr() << endl;
+        imprimePorNivel(p->getEsq(), nivel+1, tabela);
+        imprimePorNivel(p->getDir(), nivel+1, tabela);
     }
 }
 
-void AVL::imprimeInOrdem()
+void AVL::imprimeInOrdem(Tabela * tabela)
 {
-    auxInOrdem(raiz);
+    auxInOrdem(raiz, tabela);
     cout << endl;
 }
-void AVL::auxInOrdem(NoAVL *p) 
+void AVL::auxInOrdem(NoAVL *p, Tabela * tabela) 
 { 
     if(p != NULL) 
     { 
-        auxInOrdem(p->getEsq()); 
-        cout << p->getInfo() << " "; 
-        auxInOrdem(p->getDir()); 
+        auxInOrdem(p->getEsq(), tabela); 
+        Registro regP = tabela->buscaPorPosicao(p->getInfo());
+        cout<< regP.getCodigo() << " | " << regP.getDataStr() << endl;
+        auxInOrdem(p->getDir(),tabela); 
     } 
 } 
 
