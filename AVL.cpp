@@ -146,6 +146,7 @@ NoAVL* AVL::auxInsere(NoAVL *p, long int chave, Tabela * tabela)
 
 bool AVL::busca(long int chave, Tabela * tabela)
 {
+    cout << "Busca " << chave <<endl;
     return auxBusca(raiz, chave, tabela);
 }
 

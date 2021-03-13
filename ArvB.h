@@ -1,6 +1,8 @@
 #ifndef ArvB_H_INCLUDED
 #define ArvB_H_INCLUDED
 #include "NoArvB.h"
+#include "Tabela.h"
+
 
 class ArvB
 {
@@ -8,12 +10,13 @@ public:
     ArvB(int m);
     ~ArvB();
     bool vazia(); // verifica se a �rvore est� vazia
-    NoArvB* busca(int chave);
-    void insere(int chave);
-    void imprime();
+    NoArvB* busca(int chave, Tabela * tabela);
+    void insere(int chave, Tabela * tabela);
+    void imprime(Tabela * tabela);
     int getM();
     int getN();
     int getComparacoes();
+    
 
 
    // void preencheABB(ArvB *a, int p, int q);
@@ -25,12 +28,12 @@ public:
 private:
     NoArvB* raiz; // ponteiro para o No raiz da �rvore
     int m;//grau minimo
-    NoArvB* auxBusca(NoArvB *p, int chave);
-    NoArvB* auxInsere(NoArvB *p, int chave);
-    void auxImprime(NoArvB* p);
+    NoArvB* auxBusca(NoArvB *p, int chave, Tabela * tabela);
+    NoArvB* auxInsere(NoArvB *p, int chave, Tabela * tabela);
+    void auxImprime(NoArvB* p, Tabela * tabela);
     NoArvB* libera(NoArvB *p);
     int n;
-    void insereComEspaco(NoArvB *p, int chave);
+    void insereComEspaco(NoArvB *p, int chave, Tabela * tabela);
     NoArvB * cisao(NoArvB * p);
     int comparacoes;
 
