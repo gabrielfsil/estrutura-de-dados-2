@@ -10,12 +10,10 @@ using namespace std;
 QuadTree::QuadTree()
 {
     raiz = NULL;
+    
 }
 
-bool QuadTree::vazia()
-{
-    return raiz == NULL;
-}
+
 
 //Retorna o quadrante Q onde P está localizado no quadrante enraizado por R
 int quadtree_compare(NoQuad * p, Cidade * cidade)
