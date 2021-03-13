@@ -10,6 +10,7 @@
 #include "Registro.h"
 #include "Data.h"
 #include "Ordena.h"
+#include "Tabela.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -243,276 +244,403 @@ void totalDiario(Registro *registros, int N, map<int, int> &registrosPorCidade)
     }
 }
 
+// Leitura do arquivo brazil_covid19_cities_processado.csv e armazena em uma tabela hash
+void leituraDeCasos(string path, Tabela *tabela, int tamanho)
+{
+    // string completePath = path + "teste-processado-10.csv";
+    string completePath = path + "/brazil_covid19_cities_processado.csv";
+
+    ifstream myfile(completePath);
+    string line;
+    vector<string> dados;
+    int i = 0;
+    if (myfile.is_open())
+    {
+
+        while (!myfile.eof())
+        {
+            getline(myfile, line);
+            //Pula a primeira linha
+            if (i != 0)
+            {
+                //Divide as informações da linha em vetores de string
+                //esses são os dados que constituirão o registro
+                split(line, ',', dados);
+
+                Registro registro;
+
+                registro.setData(dados[0]);
+                registro.setSigla(dados[1]);
+                registro.setCidade(dados[2]);
+                registro.setCodigo(stoi(dados[3]));
+                registro.setCasos(stoi(dados[4]));
+                registro.setMortes(stoi(dados[5]));
+
+                tabela->insere(registro);
+
+                //Limpa o vetor dos dados da linha para reuso
+                dados.clear();
+                if (i >= tamanho)
+                {
+
+                    return;
+                }
+            }
+            i++;
+        }
+
+        myfile.close();
+    }
+    else
+        cerr << "ERRO: O arquivo nao pode ser aberto!" << endl;
+}
+
 int main(int argc, char *argv[])
 {
 
-    //PARA EXECUÇÃO DE TESTES PELO PROFESSOR
-    //SE HABILITADO NÃO EXECUTAR O CÓDIGO DE IMPLEMENTAÇÃO COMPLETA DO TRABALHO
-    int saida;
-    cout << "=====Modulo de testes=====" << endl;
-    cout << "Digite 1 se deseja exibir o resultado no console"<< endl;
-    cout << "Digite 2 se deseja o resultado num arquivo"<< endl;
-    cin >> saida;
+    int opcao = 0;
 
-    int opcao;
-    cout << "Escolha uma das opcoes de teste" << endl;
-    cout << "1 - Pre-Processamento" << endl;
-    cout << "2 - Importacão de N registros aleatorios" << endl;
-    cout << "3 - Ordencao Metodo Insercao " << endl;
-    cout << "4 - Ordenacao Metodo Selecao  " << endl;
-    cout << "5 - Ordenacao QuickSort " << endl;
-    cout << "6 - Ordenacao MergeSort " << endl;
-    cin >> opcao;
-
-    
-    Registro *registros = new Registro[1500000];
-    cout << "Lendo registros" << endl;
-
-    if(opcao==1)
+    while (opcao != 5)
     {
-        //Vetor do tipo key value para servir do contador de registros por cidade
-        map<int,int> registrosPorCidade ;
-        int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
+        cout << "===============================================================" << endl
+             << "                        Módulo de Teste" << endl
+             << "===============================================================" << endl
+             << endl
+             << "Escolha uma das opções de teste:" << endl
+             << "[1] Inserir na Quad Tree" << endl
+             << "[2] Inserir na Tabela Hash" << endl
+             << "[3] Inserir na Árvore AVL" << endl
+             << "[4] Inserir na Árvore B" << endl
+             << endl
+             << "[5] Sair do Módulo de Teste" << endl
+             << endl
+             << "Resposta: ";
 
-    }
-    else{
-        leArquivoProcessado(registros, argv[1]);
-    }
-    Ordena *ord = new Ordena();
+        cin >> opcao;
 
-    // Modulo de testes
-    
-    switch(opcao)
-    {
-        case 1 :
-                if(saida==1){
-                    //Vetor do tipo key value para servir do contador de registros por cidade
-                    map<int,int> registrosPorCidade ;
-                    int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
-                    ord->quicksortPre(registros, 0, qtdRegistros);
-                    totalDiario(registros, qtdRegistros, registrosPorCidade);
-                    imprimeInformacoes(registros,10);
-                }
-                else{
-                    //Vetor do tipo key value para servir do contador de registros por cidade
-                    map<int,int> registrosPorCidade ;
-                    int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
-                    ord->quicksortPre(registros, 0, qtdRegistros);
-                    totalDiario(registros, qtdRegistros, registrosPorCidade);
-                    geraCSV(registros, 100, "teste-pre-processamento.csv");
+        if (opcao != 5)
+        {
 
-                }
+            cout << "Escolha o número de N para realizar os testes: ";
+            int n;
+            cin >> n;
+
+            switch (opcao)
+            {
+            case 1:
+                // Insere N cidades na Quad Tree
                 break;
-        case 2:
-                if(saida==1){
-                    Registro * teste = randomReg(registros, 10);
-                    imprimeInformacoes(teste,10);
-                    delete [] teste;
+            case 2:
+                // Insere N registros na Tabela Hash
+                Tabela *tabela = new Tabela(n * 15);
 
+                cout << "Lendo arquivo..." << endl;
+                leituraDeCasos(argv[1], tabela, n);
+                cout << "Leitura concluída!" << endl;
+                
+                // Imprimi saída
+                if (n > 20)
+                {
+                    // Saída em arquivo
+                    ofstream arq("saida-modulo-de-teste.txt");
+
+                    arq << "Tabela Hash - " << n << " Registros" << endl;
+
+                    arq << tabela->imprimir();
+
+                    arq.close();
                 }
-                else{
-                    Registro * teste = randomReg(registros, 100);
-                    geraCSV(teste, 100, "teste-importacao.csv");
-                    delete [] teste;
+                else
+                {
+                    // Saída no console
+
+                    cout << tabela->imprimir() << endl
+                         << endl;
                 }
+
+                delete tabela;
                 break;
-        case 3 :
-                if(saida==1){
-                    Registro * teste = randomReg(registros, 10);
-                    ord->insertsort(teste, 10);
-                    imprimeInformacoes(teste,10);
-                    delete [] teste;
-
-                }else{
-                    Registro * teste = randomReg(registros, 100);
-                    ord->insertsort(teste, 100);
-                    geraCSV(teste, 100, "teste-insert-sort.csv");
-                    delete [] teste;
-
-                }
-               break;
-        case 4:
-                if(saida==1){
-                    Registro * teste = randomReg(registros, 10);
-                    ord->selectionSort(teste, 10);
-                    imprimeInformacoes(teste,10);
-                    delete [] teste;
-
-                }else{
-                    Registro * teste = randomReg(registros, 100);
-                    ord->selectionSort(teste, 100);
-                    geraCSV(teste, 100, "teste-selection-sort.csv");
-                    delete [] teste;
-
-                }
+            case 3:
+                // Insere N chaves na Árvore AVL
                 break;
-        case 5: 
-                if(saida==1){
-                    Registro * teste = randomReg(registros, 10);
-                    ord->quicksort(teste,0, 9);
-                    imprimeInformacoes(teste,10);
-                    delete [] teste;
-
-                }else{
-                    Registro * teste = randomReg(registros, 100);
-                    ord->quicksort(teste, 0, 99);
-                    geraCSV(teste, 100, "teste-quicksort.csv");
-                    delete [] teste;
-
-                }
+            case 4:
+                // Insere N chaves na Árvore B
                 break;
-        case 6:
-                if(saida==1){
-                    Registro * teste = randomReg(registros, 10);
-                    ord->mergeSort(teste,0, 10);
-                    imprimeInformacoes(teste,10);
-                    delete [] teste;
-
-                }else{
-                    Registro * teste = randomReg(registros, 100);
-                    ord->mergeSort(teste,0, 100);
-                    geraCSV(teste, 100, "teste-merge-sort.csv");
-
-                    delete [] teste;
-
-                }
+            default:
                 break;
-            default: cout << "Opção inválida" << endl;
-
+            }
+        }
     }
 
+    // //PARA EXECUÇÃO DE TESTES PELO PROFESSOR
+    // //SE HABILITADO NÃO EXECUTAR O CÓDIGO DE IMPLEMENTAÇÃO COMPLETA DO TRABALHO
+    // int saida;
+    // cout << "=====Modulo de testes=====" << endl;
+    // cout << "Digite 1 se deseja exibir o resultado no console" << endl;
+    // cout << "Digite 2 se deseja o resultado num arquivo" << endl;
+    // cin >> saida;
 
-    //==============TRABALHO==========================//
+    // int opcao;
+    // cout << "Escolha uma das opcoes de teste" << endl;
+    // cout << "1 - Pre-Processamento" << endl;
+    // cout << "2 - Importacão de N registros aleatorios" << endl;
+    // cout << "3 - Ordencao Metodo Insercao " << endl;
+    // cout << "4 - Ordenacao Metodo Selecao  " << endl;
+    // cout << "5 - Ordenacao QuickSort " << endl;
+    // cout << "6 - Ordenacao MergeSort " << endl;
+    // cin >> opcao;
 
+    // Registro *registros = new Registro[1500000];
+    // cout << "Lendo registros" << endl;
 
-
-    //Pré-processamento
-    //Registro *registros = new Registro[1500000];
-    //Vetor do tipo key value para servir do contador de registros por cidade
-    // map<int,int> registrosPorCidade ;
-    // Ordena *ord = new Ordena();
-    // ofstream outfile(argv[2]);
-
-    // auto start1 = high_resolution_clock::now(); //Inicia contador de tempo
-
-    // int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
-
-    // cout << "leu registros" << endl ;
-
-    // auto stop1 = high_resolution_clock::now(); //Termina de contar o tempo
-    // auto duration1 =  duration_cast<milliseconds>(stop1 - start1);
-
-    // outfile << "Tempo de leitura: " << duration1.count() << " ms" << endl;
-
-    // auto start2 = high_resolution_clock::now(); //Inicia contador de tempo
-
-    // ord->quicksortPre(registros, 0, qtdRegistros-1);
-
-    // auto stop2 = high_resolution_clock::now(); //Termina de contar o tempo
-    // auto duration2 =  duration_cast<milliseconds>(stop2 - start2);
-
-    // cout <<"ordenou" << endl ;
-    // outfile << "Tempo de ordenação pré-processamento " << duration2.count() << " ms" << endl;
-
-    // auto start3 = high_resolution_clock::now(); //Inicia contador de tempo
-
-    // cout<< "calculando o total diario" << endl;
-    // totalDiario(registros, qtdRegistros, registrosPorCidade);
-
-    // auto stop3 = high_resolution_clock::now(); //Termina de contar o tempo
-    // auto duration3 =  duration_cast<milliseconds>(stop3 - start3);
-    // int totalDuration = duration1.count() + duration2.count()+duration3.count();
-
-    // outfile << "Tempo de cálculo de total diário: " << duration3.count() << " ms" << endl;
-    // cout << "A operação toda durou " << totalDuration << " milisegundos" << endl;
-    // outfile << "Operação toda durou: " << totalDuration << " ms " << endl;
-    // outfile.close();
-
-    // //Analise dos algoritmos
-
-    // ofstream saida("saida.txt");
-
-    // int N[5] = {10000, 50000, 100000, 500000, 1000000};
-    // Registro *processado = new Registro[1500000];
-    // cout << "Lendo arquivo..." << endl;
-    // leArquivoProcessado(processado, argv[1]);
-    // cout << "Leitura Concluída!" << endl;
-
-    // for (int i = 4; i < 5; i++)
+    // if (opcao == 1)
     // {
-    //     saida << "Número de registros analisados: " << N[i] << endl;
-    //     cout << "Número de registros analisados: " << N[i] << endl;
-    //     saida << " " << endl;
+    //     //Vetor do tipo key value para servir do contador de registros por cidade
+    //     map<int, int> registrosPorCidade;
+    //     int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
+    // }
+    // else
+    // {
+    //     leArquivoProcessado(registros, argv[1]);
+    // }
+    // Ordena *ord = new Ordena();
 
-    //     for (int k = 3; k < 4; k++)
+    // // Modulo de testes
+
+    // switch (opcao)
+    // {
+    // case 1:
+    //     if (saida == 1)
     //     {
-    //         Ordena *ordAnalise = new Ordena();
-
-    //         switch (k)
-    //         {
-    //         case 0:
-    //             saida << "Insertion Sort" << endl;
-    //             cout << "Insertion Sort" << endl;
-    //             break;
-    //         case 1:
-    //             saida << "Selection Sort" << endl;
-    //             cout << "Selection Sort" << endl;
-    //             break;
-    //         case 2:
-    //             saida << "Merge Sort" << endl;
-    //             cout << "Merge Sort" << endl;
-    //             break;
-    //         case 3:
-    //             saida << "Quick Sort" << endl;
-    //             cout << "Quick Sort" << endl;
-    //             break;
-    //         }
-    //         int media = 0;
-
-    //         for (int m = 0; m < 5; m++)
-    //         {
-    //             Registro *analise = randomReg(processado, N[i]);
-    //             saida << "M = " << m << endl;
-    //             cout << "M = " << m << endl;
-    //             auto analiseStart = high_resolution_clock::now(); //Inicia contador de tempo
-    //             switch (k)
-    //             {
-    //             case 0:
-    //                 ordAnalise->insertsort(analise, N[i]);
-    //                 break;
-    //             case 1:
-    //                 ordAnalise->selectionSort(analise, N[i]);
-    //                 break;
-    //             case 2:
-    //                 ordAnalise->mergeSort(analise, 0, N[i]);
-    //                 break;
-    //             case 3:
-    //                 ordAnalise->quicksort(analise, 0, N[i]);
-    //                 break;
-    //             }
-    //             auto analiseStop = high_resolution_clock::now(); //Inicia contador de tempo
-    //             auto analiseDuration = duration_cast<milliseconds>(analiseStop - analiseStart);
-    //             media += analiseDuration.count();
-
-    //             saida << "Número de comparações: " << ordAnalise->getNumComparacao() << endl;
-    //             saida << "Número de trocas: " << ordAnalise->getNumTroca() << endl;
-    //             saida << "Tempo de execução: " << analiseDuration.count() << " ms" << endl;
-    //             saida << " " << endl;
-
-    //             delete[] analise;
-    //         }
-    //         saida << "Media dos tempos de execução: " << media / 5 << " ms" << endl;
-    //         saida << " " << endl;
-
-    //         // delete[] ordAnalise;
+    //         //Vetor do tipo key value para servir do contador de registros por cidade
+    //         map<int, int> registrosPorCidade;
+    //         int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
+    //         ord->quicksortPre(registros, 0, qtdRegistros);
+    //         totalDiario(registros, qtdRegistros, registrosPorCidade);
+    //         imprimeInformacoes(registros, 10);
     //     }
-    //     saida << " ================================= " << endl;
+    //     else
+    //     {
+    //         //Vetor do tipo key value para servir do contador de registros por cidade
+    //         map<int, int> registrosPorCidade;
+    //         int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
+    //         ord->quicksortPre(registros, 0, qtdRegistros);
+    //         totalDiario(registros, qtdRegistros, registrosPorCidade);
+    //         geraCSV(registros, 100, "teste-pre-processamento.csv");
+    //     }
+    //     break;
+    // case 2:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(registros, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(registros, 100);
+    //         geraCSV(teste, 100, "teste-importacao.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 3:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(registros, 10);
+    //         ord->insertsort(teste, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(registros, 100);
+    //         ord->insertsort(teste, 100);
+    //         geraCSV(teste, 100, "teste-insert-sort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 4:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(registros, 10);
+    //         ord->selectionSort(teste, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(registros, 100);
+    //         ord->selectionSort(teste, 100);
+    //         geraCSV(teste, 100, "teste-selection-sort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 5:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(registros, 10);
+    //         ord->quicksort(teste, 0, 9);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(registros, 100);
+    //         ord->quicksort(teste, 0, 99);
+    //         geraCSV(teste, 100, "teste-quicksort.csv");
+    //         delete[] teste;
+    //     }
+    //     break;
+    // case 6:
+    //     if (saida == 1)
+    //     {
+    //         Registro *teste = randomReg(registros, 10);
+    //         ord->mergeSort(teste, 0, 10);
+    //         imprimeInformacoes(teste, 10);
+    //         delete[] teste;
+    //     }
+    //     else
+    //     {
+    //         Registro *teste = randomReg(registros, 100);
+    //         ord->mergeSort(teste, 0, 100);
+    //         geraCSV(teste, 100, "teste-merge-sort.csv");
+
+    //         delete[] teste;
+    //     }
+    //     break;
+    // default:
+    //     cout << "Opção inválida" << endl;
     // }
 
-    // saida.close();
+    // //==============TRABALHO==========================//
 
-    delete[] registros;
-    //delete[] processado;
-    system("pause");
+    // //Pré-processamento
+    // //Registro *registros = new Registro[1500000];
+    // //Vetor do tipo key value para servir do contador de registros por cidade
+    // // map<int,int> registrosPorCidade ;
+    // // Ordena *ord = new Ordena();
+    // // ofstream outfile(argv[2]);
+
+    // // auto start1 = high_resolution_clock::now(); //Inicia contador de tempo
+
+    // // int qtdRegistros = processaCsv(registros, argv[1], registrosPorCidade);
+
+    // // cout << "leu registros" << endl ;
+
+    // // auto stop1 = high_resolution_clock::now(); //Termina de contar o tempo
+    // // auto duration1 =  duration_cast<milliseconds>(stop1 - start1);
+
+    // // outfile << "Tempo de leitura: " << duration1.count() << " ms" << endl;
+
+    // // auto start2 = high_resolution_clock::now(); //Inicia contador de tempo
+
+    // // ord->quicksortPre(registros, 0, qtdRegistros-1);
+
+    // // auto stop2 = high_resolution_clock::now(); //Termina de contar o tempo
+    // // auto duration2 =  duration_cast<milliseconds>(stop2 - start2);
+
+    // // cout <<"ordenou" << endl ;
+    // // outfile << "Tempo de ordenação pré-processamento " << duration2.count() << " ms" << endl;
+
+    // // auto start3 = high_resolution_clock::now(); //Inicia contador de tempo
+
+    // // cout<< "calculando o total diario" << endl;
+    // // totalDiario(registros, qtdRegistros, registrosPorCidade);
+
+    // // auto stop3 = high_resolution_clock::now(); //Termina de contar o tempo
+    // // auto duration3 =  duration_cast<milliseconds>(stop3 - start3);
+    // // int totalDuration = duration1.count() + duration2.count()+duration3.count();
+
+    // // outfile << "Tempo de cálculo de total diário: " << duration3.count() << " ms" << endl;
+    // // cout << "A operação toda durou " << totalDuration << " milisegundos" << endl;
+    // // outfile << "Operação toda durou: " << totalDuration << " ms " << endl;
+    // // outfile.close();
+
+    // // //Analise dos algoritmos
+
+    // // ofstream saida("saida.txt");
+
+    // // int N[5] = {10000, 50000, 100000, 500000, 1000000};
+    // // Registro *processado = new Registro[1500000];
+    // // cout << "Lendo arquivo..." << endl;
+    // // leArquivoProcessado(processado, argv[1]);
+    // // cout << "Leitura Concluída!" << endl;
+
+    // // for (int i = 4; i < 5; i++)
+    // // {
+    // //     saida << "Número de registros analisados: " << N[i] << endl;
+    // //     cout << "Número de registros analisados: " << N[i] << endl;
+    // //     saida << " " << endl;
+
+    // //     for (int k = 3; k < 4; k++)
+    // //     {
+    // //         Ordena *ordAnalise = new Ordena();
+
+    // //         switch (k)
+    // //         {
+    // //         case 0:
+    // //             saida << "Insertion Sort" << endl;
+    // //             cout << "Insertion Sort" << endl;
+    // //             break;
+    // //         case 1:
+    // //             saida << "Selection Sort" << endl;
+    // //             cout << "Selection Sort" << endl;
+    // //             break;
+    // //         case 2:
+    // //             saida << "Merge Sort" << endl;
+    // //             cout << "Merge Sort" << endl;
+    // //             break;
+    // //         case 3:
+    // //             saida << "Quick Sort" << endl;
+    // //             cout << "Quick Sort" << endl;
+    // //             break;
+    // //         }
+    // //         int media = 0;
+
+    // //         for (int m = 0; m < 5; m++)
+    // //         {
+    // //             Registro *analise = randomReg(processado, N[i]);
+    // //             saida << "M = " << m << endl;
+    // //             cout << "M = " << m << endl;
+    // //             auto analiseStart = high_resolution_clock::now(); //Inicia contador de tempo
+    // //             switch (k)
+    // //             {
+    // //             case 0:
+    // //                 ordAnalise->insertsort(analise, N[i]);
+    // //                 break;
+    // //             case 1:
+    // //                 ordAnalise->selectionSort(analise, N[i]);
+    // //                 break;
+    // //             case 2:
+    // //                 ordAnalise->mergeSort(analise, 0, N[i]);
+    // //                 break;
+    // //             case 3:
+    // //                 ordAnalise->quicksort(analise, 0, N[i]);
+    // //                 break;
+    // //             }
+    // //             auto analiseStop = high_resolution_clock::now(); //Inicia contador de tempo
+    // //             auto analiseDuration = duration_cast<milliseconds>(analiseStop - analiseStart);
+    // //             media += analiseDuration.count();
+
+    // //             saida << "Número de comparações: " << ordAnalise->getNumComparacao() << endl;
+    // //             saida << "Número de trocas: " << ordAnalise->getNumTroca() << endl;
+    // //             saida << "Tempo de execução: " << analiseDuration.count() << " ms" << endl;
+    // //             saida << " " << endl;
+
+    // //             delete[] analise;
+    // //         }
+    // //         saida << "Media dos tempos de execução: " << media / 5 << " ms" << endl;
+    // //         saida << " " << endl;
+
+    // //         // delete[] ordAnalise;
+    // //     }
+    // //     saida << " ================================= " << endl;
+    // // }
+
+    // // saida.close();
+
+    // delete[] registros;
+    // //delete[] processado;
+    // system("pause");
     return 0;
 };
