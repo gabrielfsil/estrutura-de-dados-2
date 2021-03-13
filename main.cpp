@@ -499,6 +499,7 @@ int main(int argc, char *argv[])
                 if (n > 20)
                 {
                     // Saída em arquivo
+                    arvB->imprimeArquivo("saida-modulo-de-teste-B.txt");
                 }
                 else
                 {

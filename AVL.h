@@ -4,6 +4,8 @@
 #include <string>
 #include "NoAVL.h"
 
+using namespace std;
+
 class AVL
 {
 public:

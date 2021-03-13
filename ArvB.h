@@ -2,6 +2,8 @@
 #define ArvB_H_INCLUDED
 #include "NoArvB.h"
 
+using namespace std;
+
 class ArvB
 {
 public:
@@ -11,6 +13,7 @@ public:
     NoArvB* busca(int chave);
     void insere(int chave);
     void imprime();
+    void imprimeArquivo(string filename);
     int getM();
     int getN();
     int getComparacoes();
@@ -28,6 +31,7 @@ private:
     NoArvB* auxBusca(NoArvB *p, int chave);
     NoArvB* auxInsere(NoArvB *p, int chave);
     void auxImprime(NoArvB* p);
+    void auxImprimeArquivo(NoArvB* p, ofstream &output);
     NoArvB* libera(NoArvB *p);
     int n;
     void insereComEspaco(NoArvB *p, int chave);
