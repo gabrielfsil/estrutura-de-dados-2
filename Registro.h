@@ -25,6 +25,7 @@ class Registro{
         int getCodigo();
         Data getData();
         string getDataStr();
+        string retornaEmString();
 
 
     private:
