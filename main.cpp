@@ -326,7 +326,7 @@ int leArquivo(QuadTree *arvore, string path, int tamanho)
                 split(line, ',', dados);
 
                 cidade->setCodEstado(stoi(dados[0]));
-                cidade->setCodCidade(stoi(dados[1]));
+                cidade->setCodCidade(stoi(dados[1].substr(0,6)));
                 cidade->setNomeCidade(dados[2]);
                 cidade->setLat(stof(dados[3]));
                 cidade->setLon(stof(dados[4]));
@@ -367,7 +367,7 @@ int main(int argc, char *argv[])
     vector<long int> hash;
 
     cout << "Lendo arquivo brazil_covid19_cities_processado.csv..." << endl;
-    leituraDeCasos(argv[1], tabela, 2000, &hash);
+    leituraDeCasos(argv[1], tabela, 10000, &hash);
     cout << "Leitura concluída!" << endl;
 
     // Selecionar N conjuntos aleatórios da tabela e adicionar na estrutura
@@ -463,9 +463,9 @@ int main(int argc, char *argv[])
             cout << "Cidades: " << endl;
             for(int i =0; i<cidades.size(); i++)
             {
-                cout<< cidades[i]->getNomeCidade() << endl;
+                // cout<< cidades[i]->getNomeCidade() << endl;
                 int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
-                cout << "Total de casos: " << casos << endl;
+                // cout << "Total de casos: " << casos << endl;
                 total+=casos;
             }
             cout << "Total de casos na região: " << total << endl;
