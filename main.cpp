@@ -377,10 +377,17 @@ int main(int argc, char *argv[])
 
 
     // Para cada valor de N
-    for (int n = 0; n < 5; n++)
+    for (int n = 0; n < 1; n++)
     {
         // M = 5
         // Para cada valor de N haverão 5 interações
+        int comparacoesAVL =0;
+        int tempoAVL = 0;
+        int comparacoesB20 =0;
+        int tempoB20 =0;
+        int comparacoesB200 =0;
+        int tempoB200= 0;
+
         for (int m = 0; m < 5; m++)
         {
             AVL *arvAVL = new AVL();
@@ -399,27 +406,26 @@ int main(int argc, char *argv[])
             cout << "Inserindo valores nas estruturas..." << endl;
 
             // Inserir na estrutura
-            cout << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n]<<endl;
-            arq << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n]<<endl;
+            cout << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n] << " M = " << m <<endl;
+            arq << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n]<< " M = " << m <<endl;
 
 
             int i =0;
-            int comparacoesAVL =0;
-            int tempoAVL = 0;
-            int *aux = new int[valoresDeN[n]]();
+           
+            int *auxAVL = new int[valoresDeN[n]]();
 
             auto startInsertAVL = high_resolution_clock::now(); //Inicia contador de tempo
             srand(time(NULL));
             while (i < valoresDeN[n])
             {
                 int num = rand() % valoresDeN[n];
-                while ((num < 0) || (aux[num] != 0))
+                while ((num < 0) || (auxAVL[num] != 0))
                 {
                     num = rand() % valoresDeN[n];
                 }
 
                 arvAVL->insere(hash[num], tabela);
-                aux[num] =1;
+                auxAVL[num] =1;
                 i++;
             }
             auto stopInsertAVL = high_resolution_clock::now(); //Termina de contar o tempo
@@ -434,29 +440,28 @@ int main(int argc, char *argv[])
             arq << "Tempo de inserção: " << durationInsertAVL.count() << " ms" << endl;
             arq <<endl;
 
-            cout << "Inserindo na Arvore B (d=20) - quantidade de registros: " <<valoresDeN[n]<<endl;
-            arq << "Inserindo na Arvore B (d=20) - quantidade de registros: " <<valoresDeN[n]<<endl;
+            cout << "Inserindo na Arvore B (d=20) - quantidade de registros: " << " M = " << m <<endl;
+            arq << "Inserindo na Arvore B (d=20) - quantidade de registros: " << " M = " << m <<endl;
 
 
-            delete [] aux;
+            delete [] auxAVL;
 
             i =0;
-            int *aux = new int[valoresDeN[n]]();
-            int comparacoesB20 =0;
-            int tempoB20 =0;
+            int *auxB20 = new int[valoresDeN[n]]();
+           
 
             auto startInsertB20 = high_resolution_clock::now(); //Inicia contador de tempo
             srand(time(NULL));
             while (i < valoresDeN[n])
             {
                 int num = rand() % valoresDeN[n];
-                while ((num < 0) || (aux[num] != 0))
+                while ((num < 0) || (auxB20[num] != 0))
                 {
                     num = rand() % valoresDeN[n];
                 }
 
                 arvB20->insere(hash[num], tabela);
-                aux[num] =1;
+                auxB20[num] =1;
                 i++;
             }
             auto stopInsertB20 = high_resolution_clock::now(); //Termina de contar o tempo
@@ -472,29 +477,27 @@ int main(int argc, char *argv[])
             arq << "Tempo de inserção: " << durationInsertB20.count() << " ms" << endl;
             arq <<endl;
 
-            delete [] aux;
+            delete [] auxB20;
 
-            cout << "Inserindo na Arvore B (d=200) - quantidade de registros: " <<valoresDeN[n]<<endl;
-            arq << "Inserindo na Arvore B (d=200) - quantidade de registros: " <<valoresDeN[n]<<endl;
+            cout << "Inserindo na Arvore B (d=200) - quantidade de registros: " << " M = " << m <<endl;
+            arq << "Inserindo na Arvore B (d=200) - quantidade de registros: " << " M = " << m <<endl;
 
 
             i =0;
-            int *aux = new int[valoresDeN[n]]();
-            int comparacoesB200 =0;
-            int tempoB200= 0;
+            int *auxB200 = new int[valoresDeN[n]]();
 
             auto startInsertB200 = high_resolution_clock::now(); //Inicia contador de tempo
             srand(time(NULL));
             while (i < valoresDeN[n])
             {
                 int num = rand() % valoresDeN[n];
-                while ((num < 0) || (aux[num] != 0))
+                while ((num < 0) || (auxB200[num] != 0))
                 {
                     num = rand() % valoresDeN[n];
                 }
 
                 arvB200->insere(hash[num], tabela);
-                aux[num] =1;
+                auxB200[num] =1;
                 i++;
             }
             auto stopInsertB200 = high_resolution_clock::now(); //Termina de contar o tempo
@@ -511,10 +514,23 @@ int main(int argc, char *argv[])
             arq << "Tempo de inserção: " << durationInsertB200.count() << " ms" << endl;
             arq <<endl;
 
-            delete [] aux;
+            delete [] auxB200;
         }
-    }
+        arq << "=======================================================" <<endl;
+        arq << "AVL"<<endl;
+        arq << "Media de comprações de chave: " << comparacoesAVL/5 <<endl;
+        arq << "Media de tempo de inserção: " << tempoAVL/5 <<endl;
+        arq << "=======================================================" <<endl;
+        arq << "Arvore B (d=20)"<<endl;
+        arq << "Media de comprações de chave: " << comparacoesB20/5 <<endl;
+        arq << "Media de tempo de inserçãõ: " << tempoB20/5 <<endl;
+        arq << "=======================================================" <<endl;
+        arq << "Arvore B (d-200)"<<endl;
+        arq << "Media de comprações de chave: " << comparacoesB200/5 <<endl;
+        arq << "Media de tempo de inserçãõ: " << tempoB200/5 <<endl;
 
+    }
+    arq.close();
     int opcao = 0;
 
     while (opcao != 3)
