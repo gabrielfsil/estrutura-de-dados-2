@@ -1,87 +1,121 @@
 Inserindo na AVL - quantidade de registros: 10000 M = 0
 Inserção na AVL concluída!
-Comparações de chave: 121121
-Tempo de inserção: 252 ms
+Comparações de chave: 121360
+Tempo de inserção: 305 ms
 
-Inserindo na Arvore B (d=20) - quantidade de registros:  M = 0
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 0
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 374247
-Tempo de inserção: 495 ms
+Comparações de chave: 372635
+Tempo de inserção: 419 ms
 
-Inserindo na Arvore B (d=200) - quantidade de registros:  M = 0
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 0
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1522241
-Tempo de inserção: 1825 ms
+Comparações de chave: 1521942
+Tempo de inserção: 1933 ms
 
 Inserindo na AVL - quantidade de registros: 10000 M = 1
 Inserção na AVL concluída!
-Comparações de chave: 121172
-Tempo de inserção: 200 ms
+Comparações de chave: 120701
+Tempo de inserção: 399 ms
 
-Inserindo na Arvore B (d=20) - quantidade de registros:  M = 1
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 1
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 373421
-Tempo de inserção: 403 ms
+Comparações de chave: 373252
+Tempo de inserção: 642 ms
 
-Inserindo na Arvore B (d=200) - quantidade de registros:  M = 1
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 1
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1529776
-Tempo de inserção: 1759 ms
+Comparações de chave: 1524572
+Tempo de inserção: 1884 ms
 
 Inserindo na AVL - quantidade de registros: 10000 M = 2
 Inserção na AVL concluída!
-Comparações de chave: 121155
-Tempo de inserção: 209 ms
+Comparações de chave: 121420
+Tempo de inserção: 353 ms
 
-Inserindo na Arvore B (d=20) - quantidade de registros:  M = 2
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 2
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 374864
-Tempo de inserção: 401 ms
+Comparações de chave: 376357
+Tempo de inserção: 479 ms
 
-Inserindo na Arvore B (d=200) - quantidade de registros:  M = 2
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 2
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1525343
-Tempo de inserção: 1749 ms
+Comparações de chave: 1533338
+Tempo de inserção: 2211 ms
 
 Inserindo na AVL - quantidade de registros: 10000 M = 3
 Inserção na AVL concluída!
-Comparações de chave: 120696
-Tempo de inserção: 205 ms
+Comparações de chave: 121657
+Tempo de inserção: 409 ms
 
-Inserindo na Arvore B (d=20) - quantidade de registros:  M = 3
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 3
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 378896
-Tempo de inserção: 403 ms
+Comparações de chave: 372315
+Tempo de inserção: 506 ms
 
-Inserindo na Arvore B (d=200) - quantidade de registros:  M = 3
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 3
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1549280
-Tempo de inserção: 1805 ms
+Comparações de chave: 1542750
+Tempo de inserção: 1765 ms
 
 Inserindo na AVL - quantidade de registros: 10000 M = 4
 Inserção na AVL concluída!
-Comparações de chave: 121034
-Tempo de inserção: 205 ms
+Comparações de chave: 120534
+Tempo de inserção: 382 ms
 
-Inserindo na Arvore B (d=20) - quantidade de registros:  M = 4
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 4
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 374516
-Tempo de inserção: 447 ms
+Comparações de chave: 375063
+Tempo de inserção: 470 ms
 
-Inserindo na Arvore B (d=200) - quantidade de registros:  M = 4
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 4
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1516071
-Tempo de inserção: 1818 ms
+Comparações de chave: 1538971
+Tempo de inserção: 1953 ms
 
 =======================================================
 AVL
-Media de comprações de chave: 121035
-Media de tempo de inserção: 214
+Media de comprações de chave: 121134
+Media de tempo de inserção: 369
 =======================================================
 Arvore B (d=20)
-Media de comprações de chave: 375188
-Media de tempo de inserçãõ: 429
+Media de comprações de chave: 373924
+Media de tempo de inserçãõ: 503
 =======================================================
 Arvore B (d-200)
-Media de comprações de chave: 1528542
-Media de tempo de inserçãõ: 1791
+Media de comprações de chave: 1532314
+Media de tempo de inserçãõ: 1949
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 489
+Tempo de Busca: 100 ms 
+
+Código da Cidade: 530010
+Total de Casos: 260
+Tempo de Busca: 131 ms 
+
+Código da Cidade: 355030
+Total de Casos: 0
+Tempo de Busca: 86 ms 
+
+Código da Cidade: 310620
+Total de Casos: 129
+Tempo de Busca: 84 ms 
+
+Código da Cidade: 410690
+Total de Casos: 74
+Tempo de Busca: 99 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 1121
+Tempo de Busca: 126341 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 1
+Tempo de Busca: 2170 ms 

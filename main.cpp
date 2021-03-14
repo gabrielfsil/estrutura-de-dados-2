@@ -326,7 +326,7 @@ int leArquivo(QuadTree *arvore, string path, int tamanho)
                 split(line, ',', dados);
 
                 cidade->setCodEstado(stoi(dados[0]));
-                cidade->setCodCidade(stoi(dados[1].substr(0,6)));
+                cidade->setCodCidade(stoi(dados[1].substr(0, 6)));
                 cidade->setNomeCidade(dados[2]);
                 cidade->setLat(stof(dados[3]));
                 cidade->setLon(stof(dados[4]));
@@ -356,18 +356,18 @@ int leArquivo(QuadTree *arvore, string path, int tamanho)
 
 int main(int argc, char *argv[])
 {
-     // Análise da Estruturas Balanceadas
+    // Análise da Estruturas Balanceadas
     QuadTree *quadTree = new QuadTree();
 
     cout << "Lendo arquivo brazil_cities_coordinates.csv..." << endl;
     leArquivo(quadTree, argv[1], 0);
     cout << "Leitura concluída!" << endl;
 
-    Tabela *tabela = new Tabela(1500000);
+    Tabela *tabela = new Tabela(20000000);
     vector<long int> hash;
 
     cout << "Lendo arquivo brazil_covid19_cities_processado.csv..." << endl;
-    leituraDeCasos(argv[1], tabela, 10000, &hash);
+    leituraDeCasos(argv[1], tabela, 0, &hash);
     cout << "Leitura concluída!" << endl;
 
     // Selecionar N conjuntos aleatórios da tabela e adicionar na estrutura
@@ -375,18 +375,17 @@ int main(int argc, char *argv[])
 
     ofstream arq("saida-analise-estruturas.txt");
 
-
     // Para cada valor de N
-    for (int n = 0; n < 1; n++)
+    for (int n = 0; n < 5; n++)
     {
         // M = 5
         // Para cada valor de N haverão 5 interações
-        int comparacoesAVL =0;
+        int comparacoesAVL = 0;
         int tempoAVL = 0;
-        int comparacoesB20 =0;
-        int tempoB20 =0;
-        int comparacoesB200 =0;
-        int tempoB200= 0;
+        int comparacoesB20 = 0;
+        int tempoB20 = 0;
+        int comparacoesB200 = 0;
+        int tempoB200 = 0;
 
         for (int m = 0; m < 5; m++)
         {
@@ -406,12 +405,11 @@ int main(int argc, char *argv[])
             cout << "Inserindo valores nas estruturas..." << endl;
 
             // Inserir na estrutura
-            cout << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n] << " M = " << m <<endl;
-            arq << "Inserindo na AVL - quantidade de registros: " <<valoresDeN[n]<< " M = " << m <<endl;
+            cout << "Inserindo na AVL - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
+            arq << "Inserindo na AVL - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
 
+            int i = 0;
 
-            int i =0;
-           
             int *auxAVL = new int[valoresDeN[n]]();
 
             auto startInsertAVL = high_resolution_clock::now(); //Inicia contador de tempo
@@ -425,30 +423,27 @@ int main(int argc, char *argv[])
                 }
 
                 arvAVL->insere(hash[num], tabela);
-                auxAVL[num] =1;
+                auxAVL[num] = 1;
                 i++;
             }
             auto stopInsertAVL = high_resolution_clock::now(); //Termina de contar o tempo
-            auto durationInsertAVL =  duration_cast<milliseconds>(stopInsertAVL - startInsertAVL);
-            comparacoesAVL+=arvAVL->getComparacoes();
-            tempoAVL+= durationInsertAVL.count();
-
+            auto durationInsertAVL = duration_cast<milliseconds>(stopInsertAVL - startInsertAVL);
+            comparacoesAVL += arvAVL->getComparacoes();
+            tempoAVL += durationInsertAVL.count();
 
             cout << "Inserção na AVL concluída!" << endl;
             arq << "Inserção na AVL concluída!" << endl;
-            arq << "Comparações de chave: " <<arvAVL->getComparacoes() << endl; 
+            arq << "Comparações de chave: " << arvAVL->getComparacoes() << endl;
             arq << "Tempo de inserção: " << durationInsertAVL.count() << " ms" << endl;
-            arq <<endl;
+            arq << endl;
 
-            cout << "Inserindo na Arvore B (d=20) - quantidade de registros: " << " M = " << m <<endl;
-            arq << "Inserindo na Arvore B (d=20) - quantidade de registros: " << " M = " << m <<endl;
+            cout << "Inserindo na Arvore B (d=20) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
+            arq << "Inserindo na Arvore B (d=20) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
 
+            delete[] auxAVL;
 
-            delete [] auxAVL;
-
-            i =0;
+            i = 0;
             int *auxB20 = new int[valoresDeN[n]]();
-           
 
             auto startInsertB20 = high_resolution_clock::now(); //Inicia contador de tempo
             srand(time(NULL));
@@ -461,29 +456,27 @@ int main(int argc, char *argv[])
                 }
 
                 arvB20->insere(hash[num], tabela);
-                auxB20[num] =1;
+                auxB20[num] = 1;
                 i++;
             }
             auto stopInsertB20 = high_resolution_clock::now(); //Termina de contar o tempo
-            auto durationInsertB20 =  duration_cast<milliseconds>(stopInsertB20 - startInsertB20);
-            
-            comparacoesB20+=arvB20->getComparacoes();
-            tempoB20+=durationInsertB20.count();
+            auto durationInsertB20 = duration_cast<milliseconds>(stopInsertB20 - startInsertB20);
 
+            comparacoesB20 += arvB20->getComparacoes();
+            tempoB20 += durationInsertB20.count();
 
             cout << "Inserção na Arvore B (d=20) concluída!" << endl;
             arq << "Inserção na Arvore B (d=20) concluída!" << endl;
-            arq << "Comparações de chave: " <<arvB20->getComparacoes() << endl; 
+            arq << "Comparações de chave: " << arvB20->getComparacoes() << endl;
             arq << "Tempo de inserção: " << durationInsertB20.count() << " ms" << endl;
-            arq <<endl;
+            arq << endl;
 
-            delete [] auxB20;
+            delete[] auxB20;
 
-            cout << "Inserindo na Arvore B (d=200) - quantidade de registros: " << " M = " << m <<endl;
-            arq << "Inserindo na Arvore B (d=200) - quantidade de registros: " << " M = " << m <<endl;
+            cout << "Inserindo na Arvore B (d=200) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
+            arq << "Inserindo na Arvore B (d=200) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
 
-
-            i =0;
+            i = 0;
             int *auxB200 = new int[valoresDeN[n]]();
 
             auto startInsertB200 = high_resolution_clock::now(); //Inicia contador de tempo
@@ -497,41 +490,100 @@ int main(int argc, char *argv[])
                 }
 
                 arvB200->insere(hash[num], tabela);
-                auxB200[num] =1;
+                auxB200[num] = 1;
                 i++;
             }
             auto stopInsertB200 = high_resolution_clock::now(); //Termina de contar o tempo
-            auto durationInsertB200 =  duration_cast<milliseconds>(stopInsertB200 - startInsertB200);
+            auto durationInsertB200 = duration_cast<milliseconds>(stopInsertB200 - startInsertB200);
 
-
-            comparacoesB200+=arvB200->getComparacoes();
-            tempoB200+=durationInsertB200.count();
-
+            comparacoesB200 += arvB200->getComparacoes();
+            tempoB200 += durationInsertB200.count();
 
             cout << "Inserção na Arvore B (d=200) concluída!" << endl;
             arq << "Inserção na Arvore B (d=200) concluída!" << endl;
-            arq << "Comparações de chave: " <<arvB200->getComparacoes() << endl; 
+            arq << "Comparações de chave: " << arvB200->getComparacoes() << endl;
             arq << "Tempo de inserção: " << durationInsertB200.count() << " ms" << endl;
-            arq <<endl;
+            arq << endl;
 
-            delete [] auxB200;
+            delete[] auxB200;
         }
-        arq << "=======================================================" <<endl;
-        arq << "AVL"<<endl;
-        arq << "Media de comprações de chave: " << comparacoesAVL/5 <<endl;
-        arq << "Media de tempo de inserção: " << tempoAVL/5 <<endl;
-        arq << "=======================================================" <<endl;
-        arq << "Arvore B (d=20)"<<endl;
-        arq << "Media de comprações de chave: " << comparacoesB20/5 <<endl;
-        arq << "Media de tempo de inserçãõ: " << tempoB20/5 <<endl;
-        arq << "=======================================================" <<endl;
-        arq << "Arvore B (d-200)"<<endl;
-        arq << "Media de comprações de chave: " << comparacoesB200/5 <<endl;
-        arq << "Media de tempo de inserçãõ: " << tempoB200/5 <<endl;
-
+        arq << "=======================================================" << endl;
+        arq << "AVL" << endl;
+        arq << "Media de comprações de chave: " << comparacoesAVL / 5 << endl;
+        arq << "Media de tempo de inserção: " << tempoAVL / 5 << endl;
+        arq << "=======================================================" << endl;
+        arq << "Arvore B (d=20)" << endl;
+        arq << "Media de comprações de chave: " << comparacoesB20 / 5 << endl;
+        arq << "Media de tempo de inserçãõ: " << tempoB20 / 5 << endl;
+        arq << "=======================================================" << endl;
+        arq << "Arvore B (d-200)" << endl;
+        arq << "Media de comprações de chave: " << comparacoesB200 / 5 << endl;
+        arq << "Media de tempo de inserçãõ: " << tempoB200 / 5 << endl;
     }
-    arq.close();
-    int opcao = 0;
+
+    // Teste para relatório
+    // Código de algumas cidades para busca
+    // 330455 - Rio de Janeiro
+    // 530010 - Brasília
+    // 355030 - São Paulo
+    // 310620 - Belo Horizonte
+    // 410690 - Curitiba
+    arq << "=========================================================" << endl;
+    arq << " [S1] Busca por Total de Casos em uma cidade" << endl
+        << endl;
+    int codigos[5] = {330455, 530010, 355030, 310620, 410690};
+
+    for (int i = 0; i < 5; i++)
+    {
+        auto startTotalCasos = high_resolution_clock::now(); //Inicia contador de tempo
+
+        int total = tabela->totalDeCasos(codigos[i]);
+        auto stopTotalCasos = high_resolution_clock::now(); //Termina de contar o tempo
+        auto durationTotalCasos = duration_cast<milliseconds>(stopTotalCasos - startTotalCasos);
+
+        arq << endl
+            << "Código da Cidade: " << codigos[i];
+        arq << endl
+            << "Total de Casos: " << total << endl;
+        arq << "Tempo de Busca: " << durationTotalCasos.count() << " ms " << endl;
+    }
+
+    // Intervalos de Busca por região
+    // [(-25, -50), (-15, -40)]
+    // [(-10, -60), (-5, -50)]
+    int coordenadas[8] = {-25, -50, -15, -40, -10, -60, -5, -50};
+    arq << endl << "=========================================================" << endl;
+
+    arq << " [S2] Busca por Total de Casos em um intervalo de coordenadas" << endl;
+
+    for (int i = 0; i < 2; i++)
+    {
+
+        
+        arq << endl
+            << "Intervalo escolhido: "
+            << "[(" << coordenadas[i * 4] << " , " << coordenadas[(i + 1) + (i * 3)] << "),(" << coordenadas[(i + 2) + (i * 3)] << " , " << coordenadas[(i + 3) + (i * 3)] << ")]" << endl;
+
+        auto startTotalCasosRegiao = high_resolution_clock::now(); //Inicia contador de tempo
+
+        vector<Cidade *> cidades = quadTree->buscaRange(coordenadas[(i * 4)], coordenadas[(i + 1) + (i * 3)], coordenadas[(i + 2) + (i * 3)], coordenadas[(i + 3) + (i * 3)]);
+        int total = 0;
+
+        for (int i = 0; i < cidades.size(); i++)
+        {
+            // cout<< cidades[i]->getNomeCidade() << endl;
+            int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
+            // cout << "Total de casos: " << casos << endl;
+            total += casos;
+        }
+        auto stopTotalCasosRegiao = high_resolution_clock::now(); //Termina de contar o tempo
+        auto durationTotalCasosRegiao = duration_cast<milliseconds>(stopTotalCasosRegiao - startTotalCasosRegiao);
+
+        arq << "Total de casos na região: " << total << endl;
+        arq << "Tempo de Busca: " << durationTotalCasosRegiao.count() << " ms " << endl;
+    }
+
+    int opcao = 3;
 
     while (opcao != 3)
     {
@@ -586,20 +638,19 @@ int main(int argc, char *argv[])
             cout << endl
                  << "Intervalo escolhido: "
                  << "[(" << x0 << " , " << y0 << "),(" << x1 << " , " << y1 << ")]" << endl;
-                
-            vector<Cidade *> cidades = quadTree->buscaRange(x0,y0,x1,y1);
+
+            vector<Cidade *> cidades = quadTree->buscaRange(x0, y0, x1, y1);
             int total = 0;
 
             cout << "Cidades: " << endl;
-            for(int i =0; i<cidades.size(); i++)
+            for (int i = 0; i < cidades.size(); i++)
             {
                 // cout<< cidades[i]->getNomeCidade() << endl;
                 int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
                 // cout << "Total de casos: " << casos << endl;
-                total+=casos;
+                total += casos;
             }
             cout << "Total de casos na região: " << total << endl;
-
         }
         break;
 
@@ -609,7 +660,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    opcao = 0;
+    opcao = 5;
 
     while (opcao != 5)
     {
@@ -635,7 +686,6 @@ int main(int argc, char *argv[])
             cout << "Escolha o número de N para realizar os testes: ";
             int n;
             cin >> n;
-
 
             switch (opcao)
             {
@@ -663,15 +713,14 @@ int main(int argc, char *argv[])
             }
             break;
             case 2:
-            { 
-                    
-            // Insere N registros na Tabela Hash
+            {
+
+                // Insere N registros na Tabela Hash
                 Tabela *teste = new Tabela(n * 15);
                 vector<long int> hash;
 
-
                 cout << "Lendo arquivo..." << endl;
-                leituraDeCasos(argv[1], teste, n,&hash);
+                leituraDeCasos(argv[1], teste, n, &hash);
                 cout << "Leitura concluída!" << endl;
                 // Imprimi saída
                 if (n > 20)
@@ -719,11 +768,10 @@ int main(int argc, char *argv[])
                     }
 
                     arvAVL->insere(num, tabela);
-                    aux[num] =1;
+                    aux[num] = 1;
 
                     i++;
                 }
-                 
 
                 // Imprimi saída
                 if (n > 20)
@@ -754,7 +802,7 @@ int main(int argc, char *argv[])
                 {
                     int num = rand() % n;
 
-                    arvB->insere(num,tabela);
+                    arvB->insere(num, tabela);
 
                     i++;
                 }
@@ -778,11 +826,13 @@ int main(int argc, char *argv[])
             }
         }
     }
-
-   
+    arq.close();
 
     delete tabela;
     delete quadTree;
+
+    cout << endl
+         << "Fim de Execução" << endl;
     // //PARA EXECUÇÃO DE TESTES PELO PROFESSOR
     // //SE HABILITADO NÃO EXECUTAR O CÓDIGO DE IMPLEMENTAÇÃO COMPLETA DO TRABALHO
     // int saida;
