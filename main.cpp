@@ -367,7 +367,7 @@ int main(int argc, char *argv[])
     vector<long int> hash;
 
     cout << "Lendo arquivo brazil_covid19_cities_processado.csv..." << endl;
-    leituraDeCasos(argv[1], tabela, 0, &hash);
+    leituraDeCasos(argv[1], tabela, 2000, &hash);
     cout << "Leitura concluída!" << endl;
 
     // Selecionar N conjuntos aleatórios da tabela e adicionar na estrutura
@@ -443,7 +443,7 @@ int main(int argc, char *argv[])
             cout << endl
                  << "Digite o intervalo da região que deseja obter o total de casos: " << endl
                  << "[ ( x0 , y0 ) , ( x1 , y1 ) ]" << endl;
-            int x0, y0, x1, y1;
+            float x0, y0, x1, y1;
             cout << " x0: ";
             cin >> x0;
             cout << " y0: ";
@@ -456,6 +456,20 @@ int main(int argc, char *argv[])
             cout << endl
                  << "Intervalo escolhido: "
                  << "[(" << x0 << " , " << y0 << "),(" << x1 << " , " << y1 << ")]" << endl;
+                
+            vector<Cidade *> cidades = quadTree->buscaRange(x0,y0,x1,y1);
+            int total = 0;
+
+            cout << "Cidades: " << endl;
+            for(int i =0; i<cidades.size(); i++)
+            {
+                cout<< cidades[i]->getNomeCidade() << endl;
+                int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
+                cout << "Total de casos: " << casos << endl;
+                total+=casos;
+            }
+            cout << "Total de casos na região: " << total << endl;
+
         }
         break;
 
@@ -465,7 +479,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    int opcao = 0;
+    opcao = 0;
 
     while (opcao != 5)
     {
