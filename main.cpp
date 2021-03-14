@@ -247,7 +247,7 @@ void totalDiario(Registro *registros, int N, map<int, int> &registrosPorCidade)
 }
 
 // Leitura do arquivo brazil_covid19_cities_processado.csv e armazena em uma tabela hash
-void leituraDeCasos(string path, Tabela *tabela, int tamanho)
+void leituraDeCasos(string path, Tabela *tabela, int tamanho, vector<long int> *hash)
 {
     // string completePath = path + "teste-processado-10.csv";
     string completePath = path + "/brazil_covid19_cities_processado.csv";
@@ -278,11 +278,11 @@ void leituraDeCasos(string path, Tabela *tabela, int tamanho)
                 registro.setCasos(stoi(dados[4]));
                 registro.setMortes(stoi(dados[5]));
 
-                tabela->insere(registro);
+                hash->push_back(tabela->insere(registro));
 
                 //Limpa o vetor dos dados da linha para reuso
                 dados.clear();
-                if (i >= tamanho)
+                if (i >= tamanho && tamanho != 0)
                 {
 
                     return;
@@ -337,7 +337,7 @@ int leArquivo(QuadTree *arvore, string path, int tamanho)
 
                 //Insere o cidade na árvore
                 arvore->insere(cidade);
-                if (i >= tamanho)
+                if (i >= tamanho && tamanho != 0)
                 {
 
                     return tamanho;
@@ -386,9 +386,11 @@ int main(int argc, char *argv[])
 
         // Insere N registros na Tabela Hash
             Tabela *tabela = new Tabela(n * 15);
+            vector<long int> hash;
+
 
             cout << "Lendo arquivo..." << endl;
-            leituraDeCasos(argv[1], tabela, n);
+            leituraDeCasos(argv[1], tabela, n,&hash);
             cout << "Leitura concluída!" << endl;
 
             switch (opcao)
@@ -419,9 +421,10 @@ int main(int argc, char *argv[])
             case 2:
             { // Insere N registros na Tabela Hash
                 Tabela *tabela = new Tabela(n * 15);
+                vector<long int> codigo;
 
                 cout << "Lendo arquivo..." << endl;
-                leituraDeCasos(argv[1], tabela, n);
+                leituraDeCasos(argv[1], tabela, n, &codigo);
                 cout << "Leitura concluída!" << endl;
 
                 // Imprimi saída
@@ -474,6 +477,7 @@ int main(int argc, char *argv[])
                 if (n > 20)
                 {
                     // Saída em arquivo
+                    arvAVL->imprimeArquivo("saida-modulo-de-teste-AVL.txt");
                 }
                 else
                 {
@@ -489,7 +493,7 @@ int main(int argc, char *argv[])
                 ArvB *arvB = new ArvB(m);
 
                 cout << "Criando Arvore B" << endl;
-                cout << "Grau Mínimo: 3" << endl;
+                cout << "Grau Mínimo: " << m << endl;
 
                 int i = 0;
 
@@ -506,6 +510,7 @@ int main(int argc, char *argv[])
                 if (n > 20)
                 {
                     // Saída em arquivo
+                    arvB->imprimeArquivo("saida-modulo-de-teste-B.txt");
                 }
                 else
                 {
@@ -522,6 +527,117 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Análise da Estruturas Balanceadas
+    QuadTree *quadTree = new QuadTree();
+
+    cout << "Lendo arquivo brazil_cities_coordinates.csv..." << endl;
+    leArquivo(quadTree, argv[1], 0);
+    cout << "Leitura concluída!" << endl;
+
+    Tabela *tabela = new Tabela(1500000);
+    vector<long int> hash;
+
+    cout << "Lendo arquivo brazil_covid19_cities_processado.csv..." << endl;
+    leituraDeCasos(argv[1], tabela, 0, &hash);
+    cout << "Leitura concluída!" << endl;
+
+    // Selecionar N conjuntos aleatórios da tabela e adicionar na estrutura
+    int valoresDeN[5] = {10000, 50000, 100000, 500000, 1000000};
+
+    // Para cada valor de N
+    for (int n = 0; n < 5; n++)
+    {
+        // M = 5
+        // Para cada valor de N haverão 5 interações
+        for (int m = 0; m < 5; m++)
+        {
+            AVL *arvAVL = new AVL();
+            cout << "Criando Arvore AVL" << endl;
+
+            ArvB *arvB20 = new ArvB(20);
+
+            cout << "Criando Arvore B" << endl;
+            cout << "Grau Mínimo: " << 20 << endl;
+
+            ArvB *arvB200 = new ArvB(200);
+
+            cout << "Criando Arvore B" << endl;
+            cout << "Grau Mínimo: " << 200 << endl;
+
+            cout << "Inserindo valores nas estruturas..." << endl;
+
+            // Inserir na estrutura
+
+            cout << "Inserção concluída!" << endl;
+        }
+    }
+
+    opcao = 0;
+
+    while (opcao != 3)
+    {
+
+        cout << endl
+             << endl
+             << "********************************************************" << endl
+             << "          Análise das Estruturas Balanceadas            " << endl
+             << "********************************************************" << endl
+             << endl
+             << endl
+             << "Escolha uma das opções abaixo:" << endl
+             << "[1] Obter total de casos em uma cidade." << endl
+             << "[2] Obter total de casos em uma região" << endl
+             << endl
+             << "[3] Sair da Análise" << endl
+             << endl
+             << "Resposta: ";
+
+        cin >> opcao;
+
+        switch (opcao)
+        {
+        case 1:
+        {
+            cout << endl
+                 << "Digite o código da cidade que deseja obter o total de casos: ";
+            int codigo;
+            cin >> codigo;
+
+            int total = tabela->totalDeCasos(codigo);
+
+            cout << endl
+                 << "Total de Casos: " << total << endl;
+        }
+        break;
+        case 2:
+        {
+            cout << endl
+                 << "Digite o intervalo da região que deseja obter o total de casos: " << endl
+                 << "[ ( x0 , y0 ) , ( x1 , y1 ) ]" << endl;
+            int x0, y0, x1, y1;
+            cout << " x0: ";
+            cin >> x0;
+            cout << " y0: ";
+            cin >> y0;
+            cout << " x1: ";
+            cin >> x1;
+            cout << " y1: ";
+            cin >> y1;
+
+            cout << endl
+                 << "Intervalo escolhido: "
+                 << "[(" << x0 << " , " << y0 << "),(" << x1 << " , " << y1 << ")]" << endl;
+        }
+        break;
+
+        default:
+            cout << "Comando não encontrado! Tente novamente." << endl;
+            break;
+        }
+    }
+
+    delete tabela;
+    delete quadTree;
     // //PARA EXECUÇÃO DE TESTES PELO PROFESSOR
     // //SE HABILITADO NÃO EXECUTAR O CÓDIGO DE IMPLEMENTAÇÃO COMPLETA DO TRABALHO
     // int saida;

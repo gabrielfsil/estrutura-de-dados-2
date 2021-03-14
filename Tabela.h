@@ -23,12 +23,12 @@ class Tabela
         Tabela(int m);
         ~Tabela();
         long int hash(long int k, int i);
-        bool insere(Registro registro);
+        long int insere(Registro registro);
         Registro busca(int codigo, string data);
         Registro buscaPorPosicao(long int posicao);
         string imprimir();
         void escrever(string path);
-        Registro * getRegistros() { return registros;}
+        int totalDeCasos(int codigo);
 };
 
 #endif // TABELA_H

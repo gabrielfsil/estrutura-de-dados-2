@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "ArvB.h"
 #include "Registro.h"
 #include "Tabela.h"
@@ -7,18 +8,15 @@
 
 using namespace std;
 
-
 ArvB::ArvB(int m)
 {
     raiz = NULL;
-    this->m = m;//grau minimo
-    comparacoes=0;
-
+    this->m = m; //grau minimo
+    comparacoes = 0;
 }
 
 ArvB::~ArvB()
 {
-
 }
 
 int ArvB::getM()
@@ -43,37 +41,37 @@ void ArvB::insere(int val, Tabela * tabela)
 
 NoArvB* ArvB::auxInsere(NoArvB *p, int chave, Tabela * tabela)
 {
-   // cout << "inserindo chave "<< chave << endl;
-  if(p==NULL)
-  {
-     // cout << "raiz é nula, raiz recebe " << chave << endl;
-        p = new NoArvB(m,true);
+    // cout << "inserindo chave "<< chave << endl;
+    if (p == NULL)
+    {
+        // cout << "raiz é nula, raiz recebe " << chave << endl;
+        p = new NoArvB(m, true);
         p->getChaves()[0] = chave;
         p->setN(1);
         raiz = p;
-
-  }
-  else {
+    }
+    else
+    {
         comparacoes++;
-        if(p->getN() == (2*m-1))//se não há espaço para chaves no nó
+        if (p->getN() == (2 * m - 1)) //se não há espaço para chaves no nó
         {
             // cout <<  "numero de chaves no no: " << p->getN() << endl;
             //cout << "No cheio!" << endl;
             //cria no para ser a nova raiz
-                NoArvB * q = new NoArvB(m, false); 
+            NoArvB *q = new NoArvB(m, false);
 
-                //raiz antiga p vira filha da nova raiz q
+            //raiz antiga p vira filha da nova raiz q
 
             // cout << "no p (raiz antiga) vira filho do no q" <<endl;
-                q->getFilhos()[0] = p;
+            q->getFilhos()[0] = p;
 
-                //fazemos cisão na raiz antiga p e movemos uma chave para a nova raiz q
+            //fazemos cisão na raiz antiga p e movemos uma chave para a nova raiz q
 
-                //cout << "cisao no no p e movendo chave para q" << endl;
-                q->cisao(0,p);
+            //cout << "cisao no no p e movendo chave para q" << endl;
+            q->cisao(0, p);
 
-                //a nova raiz tem dois filhos, agora definimos ual filho receberá a chave
-                int i =0;
+            //a nova raiz tem dois filhos, agora definimos ual filho receberá a chave
+            int i = 0;
 
                 // cout << "q->chaves[0] = " << q->getChaves()[0] <<endl;
                 comparacoes++;
@@ -97,10 +95,11 @@ NoArvB* ArvB::auxInsere(NoArvB *p, int chave, Tabela * tabela)
                 // cout << "inserindo em q->filhos[" << i <<"]" << endl;
                 insereComEspaco(q->getFilhos()[i], chave,tabela);
 
-                p = q;
-            
-        }else {
-                
+             p = q;
+        }
+        else
+        {
+
             //   cout <<  "numero de chaves no no: " << p->getN() << endl;
             //   cout << "Tem espaço!" << endl;
             insereComEspaco(p, chave, tabela);
@@ -109,8 +108,6 @@ NoArvB* ArvB::auxInsere(NoArvB *p, int chave, Tabela * tabela)
     }
 
     return p;
-
-    
 }
 
 void ArvB::insereComEspaco(NoArvB * p, int chave, Tabela * tabela)
@@ -178,7 +175,6 @@ void ArvB::insereComEspaco(NoArvB * p, int chave, Tabela * tabela)
         
             auxInsere(p->getFilhos()[i+1], chave, tabela);
     }
-
 }
 NoArvB * ArvB::busca(int chave, Tabela * tabela)
 {
@@ -215,7 +211,7 @@ NoArvB * ArvB::auxBusca(NoArvB *p, int chave, Tabela * tabela)
     if(valP == valC)
     //if(p->getChaves()[i]==chave)
         return p;
-    if(p->ehFolha())
+    if (p->ehFolha())
         return NULL;
     return auxBusca(p->getFilhos()[i],chave, tabela);
 }
@@ -224,7 +220,6 @@ void ArvB::imprime(Tabela * tabela)
 {
     auxImprime(raiz, tabela);
     cout << endl;
-
 }
 
 void ArvB::auxImprime(NoArvB *p, Tabela * tabela)
@@ -245,6 +240,29 @@ void ArvB::auxImprime(NoArvB *p, Tabela * tabela)
 
 }
 
+void ArvB::imprimeArquivo(string filename)
+{
+    ofstream output(filename);
+
+    auxImprimeArquivo(raiz, output);
+    cout << endl;
+}
+
+void ArvB::auxImprimeArquivo(NoArvB *p, ofstream &output)
+{
+
+    int i;
+    for (i = 0; i < p->getN(); i++)
+    {
+
+        if (p->ehFolha() == false)
+            auxImprimeArquivo(p->getFilhos()[i], output);
+        output << " " << p->getChaves()[i];
+    }
+
+    if (p->ehFolha() == false)
+        auxImprimeArquivo(p->getFilhos()[i], output);
+}
 
 // NoArvB* ArvB::libera(NoArvB *p)
 // {
@@ -257,4 +275,3 @@ void ArvB::auxImprime(NoArvB *p, Tabela * tabela)
 //     }
 //     return p;
 // }
-

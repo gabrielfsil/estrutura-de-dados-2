@@ -4,6 +4,8 @@
 #include "Tabela.h"
 
 
+using namespace std;
+
 class ArvB
 {
 public:
@@ -13,6 +15,7 @@ public:
     NoArvB* busca(int chave, Tabela * tabela);
     void insere(int chave, Tabela * tabela);
     void imprime(Tabela * tabela);
+    void imprimeArquivo(string filename);
     int getM();
     int getN();
     int getComparacoes();
@@ -31,6 +34,7 @@ private:
     NoArvB* auxBusca(NoArvB *p, int chave, Tabela * tabela);
     NoArvB* auxInsere(NoArvB *p, int chave, Tabela * tabela);
     void auxImprime(NoArvB* p, Tabela * tabela);
+    void auxImprimeArquivo(NoArvB* p, ofstream &output);
     NoArvB* libera(NoArvB *p);
     int n;
     void insereComEspaco(NoArvB *p, int chave, Tabela * tabela);
