@@ -14,6 +14,7 @@ class Tabela
         unsigned long int erros;
         unsigned long int m;
         unsigned long int mLinha; 
+        unsigned long int inseridos;
         long int hash1(long int k);
         long int hash2(long int k);
 
@@ -27,6 +28,7 @@ class Tabela
         Registro busca(int codigo, string data);
         Registro buscaPorPosicao(long int posicao);
         string imprimir();
+        void imprime();
         void escrever(string path);
         int totalDeCasos(int codigo);
 };

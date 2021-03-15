@@ -15,6 +15,7 @@ Tabela::Tabela(int m)
     mLinha = m - 2;
     colisoes = 0;
     erros = 0;
+    inseridos = 0;
 }
 
 Tabela::~Tabela()
@@ -54,6 +55,7 @@ long int Tabela::insere(Registro registro)
         {
 
             registros[posicao] = registro;
+            inseridos++;
             return posicao;
         }
 
@@ -105,6 +107,7 @@ string Tabela::imprimir()
 
     cout << endl
          << "Tabela Hashing" << endl
+         << "Inseridos: " << inseridos << endl
          << "Colisões: " << colisoes << endl
          << "Erros de Inserção: " << erros << endl
          << endl;
@@ -118,6 +121,17 @@ string Tabela::imprimir()
     }
 
     return saida;
+}
+
+void Tabela::imprime()
+{
+
+    cout << endl
+         << "Tabela Hashing" << endl
+         << "Inseridos: " << inseridos << endl
+         << "Colisões: " << colisoes << endl
+         << "Erros de Inserção: " << erros << endl
+         << endl;
 }
 
 int Tabela::totalDeCasos(int codigo)

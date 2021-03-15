@@ -1,121 +1,404 @@
 Inserindo na AVL - quantidade de registros: 10000 M = 0
 Inserção na AVL concluída!
-Comparações de chave: 121360
-Tempo de inserção: 305 ms
+Comparações de chave: 120837
+Tempo de inserção: 308 ms
 
 Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 0
 Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 372635
-Tempo de inserção: 419 ms
+Comparações de chave: 374816
+Tempo de inserção: 438 ms
 
 Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 0
 Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1521942
-Tempo de inserção: 1933 ms
+Comparações de chave: 1532050
+Tempo de inserção: 1848 ms
 
-Inserindo na AVL - quantidade de registros: 10000 M = 1
-Inserção na AVL concluída!
-Comparações de chave: 120701
-Tempo de inserção: 399 ms
-
-Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 1
-Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 373252
-Tempo de inserção: 642 ms
-
-Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 1
-Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1524572
-Tempo de inserção: 1884 ms
-
-Inserindo na AVL - quantidade de registros: 10000 M = 2
-Inserção na AVL concluída!
-Comparações de chave: 121420
-Tempo de inserção: 353 ms
-
-Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 2
-Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 376357
-Tempo de inserção: 479 ms
-
-Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 2
-Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1533338
-Tempo de inserção: 2211 ms
-
-Inserindo na AVL - quantidade de registros: 10000 M = 3
-Inserção na AVL concluída!
-Comparações de chave: 121657
-Tempo de inserção: 409 ms
-
-Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 3
-Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 372315
-Tempo de inserção: 506 ms
-
-Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 3
-Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1542750
-Tempo de inserção: 1765 ms
-
-Inserindo na AVL - quantidade de registros: 10000 M = 4
-Inserção na AVL concluída!
-Comparações de chave: 120534
-Tempo de inserção: 382 ms
-
-Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 4
-Inserção na Arvore B (d=20) concluída!
-Comparações de chave: 375063
-Tempo de inserção: 470 ms
-
-Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 4
-Inserção na Arvore B (d=200) concluída!
-Comparações de chave: 1538971
-Tempo de inserção: 1953 ms
-
-=======================================================
-AVL
-Media de comprações de chave: 121134
-Media de tempo de inserção: 369
-=======================================================
-Arvore B (d=20)
-Media de comprações de chave: 373924
-Media de tempo de inserçãõ: 503
-=======================================================
-Arvore B (d-200)
-Media de comprações de chave: 1532314
-Media de tempo de inserçãõ: 1949
 =========================================================
  [S1] Busca por Total de Casos em uma cidade
 
 
 Código da Cidade: 330455
-Total de Casos: 489
-Tempo de Busca: 100 ms 
+Total de Casos: 17793483
+Tempo de Busca: 1133 ms 
 
 Código da Cidade: 530010
-Total de Casos: 260
-Tempo de Busca: 131 ms 
+Total de Casos: 27763656
+Tempo de Busca: 1218 ms 
 
 Código da Cidade: 355030
-Total de Casos: 0
-Tempo de Busca: 86 ms 
+Total de Casos: 46957380
+Tempo de Busca: 963 ms 
 
 Código da Cidade: 310620
-Total de Casos: 129
-Tempo de Busca: 84 ms 
+Total de Casos: 5916456
+Tempo de Busca: 1126 ms 
 
 Código da Cidade: 410690
-Total de Casos: 74
-Tempo de Busca: 99 ms 
+Total de Casos: 5014999
+Tempo de Busca: 1094 ms 
 
 =========================================================
  [S2] Busca por Total de Casos em um intervalo de coordenadas
 
 Intervalo escolhido: [(-25 , -50),(-15 , -40)]
-Total de casos na região: 1121
-Tempo de Busca: 126341 ms 
+Total de casos na região: 296785094
+Tempo de Busca: 2518347 ms 
 
 Intervalo escolhido: [(-10 , -60),(-5 , -50)]
-Total de casos na região: 1
-Tempo de Busca: 2170 ms 
+Total de casos na região: 2978616
+Tempo de Busca: 25926 ms 
+Inserindo na AVL - quantidade de registros: 10000 M = 1
+Inserção na AVL concluída!
+Comparações de chave: 121387
+Tempo de inserção: 504 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 1
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 373135
+Tempo de inserção: 618 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 1
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 1543590
+Tempo de inserção: 3488 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 1782 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 1241 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 1496 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 1299 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 1127 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 2017931 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 20807 ms 
+Inserindo na AVL - quantidade de registros: 10000 M = 2
+Inserção na AVL concluída!
+Comparações de chave: 121148
+Tempo de inserção: 401 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 2
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 375362
+Tempo de inserção: 409 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 2
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 1541490
+Tempo de inserção: 2051 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 1769 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 1784 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 1757 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 1768 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 1748 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 1891059 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 23288 ms 
+Inserindo na AVL - quantidade de registros: 10000 M = 3
+Inserção na AVL concluída!
+Comparações de chave: 120877
+Tempo de inserção: 308 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 3
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 375092
+Tempo de inserção: 444 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 3
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 1547346
+Tempo de inserção: 2197 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 1058 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 1067 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 1038 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 1075 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 1312 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 1686520 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 19957 ms 
+Inserindo na AVL - quantidade de registros: 10000 M = 4
+Inserção na AVL concluída!
+Comparações de chave: 120773
+Tempo de inserção: 251 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 10000 M = 4
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 375622
+Tempo de inserção: 342 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 10000 M = 4
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 1533800
+Tempo de inserção: 1455 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 923 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 961 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 914 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 894 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 951 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 1421769 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 18549 ms 
+=======================================================
+AVL
+Media de comprações de chave: 121004
+Media de tempo de inserção: 354
+=======================================================
+Arvore B (d=20)
+Media de comprações de chave: 374805
+Media de tempo de inserçãõ: 450
+=======================================================
+Arvore B (d-200)
+Media de comprações de chave: 1539655
+Media de tempo de inserçãõ: 2207
+=======================================================
+[S1]
+Media de tempo de Busca: 1259 ms 
+=======================================================
+[S2]
+Media de tempo de Busca: 964415 ms 
+Inserindo na AVL - quantidade de registros: 50000 M = 0
+Inserção na AVL concluída!
+Comparações de chave: 721624
+Tempo de inserção: 1416 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 50000 M = 0
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 2372524
+Tempo de inserção: 2151 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 50000 M = 0
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 9683545
+Tempo de inserção: 8879 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 863 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 848 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 846 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 902 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 860 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 2189312 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 34077 ms 
+Inserindo na AVL - quantidade de registros: 50000 M = 1
+Inserção na AVL concluída!
+Comparações de chave: 724919
+Tempo de inserção: 2599 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 50000 M = 1
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 2364107
+Tempo de inserção: 3615 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 50000 M = 1
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 9670704
+Tempo de inserção: 13834 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 2107 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 2067 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 2173 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 2023 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 1910 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]
+Total de casos na região: 296785094
+Tempo de Busca: 2258317 ms 
+
+Intervalo escolhido: [(-10 , -60),(-5 , -50)]
+Total de casos na região: 2978616
+Tempo de Busca: 25190 ms 
+Inserindo na AVL - quantidade de registros: 50000 M = 2
+Inserção na AVL concluída!
+Comparações de chave: 722662
+Tempo de inserção: 1932 ms
+
+Inserindo na Arvore B (d=20) - quantidade de registros: 50000 M = 2
+Inserção na Arvore B (d=20) concluída!
+Comparações de chave: 2381243
+Tempo de inserção: 3390 ms
+
+Inserindo na Arvore B (d=200) - quantidade de registros: 50000 M = 2
+Inserção na Arvore B (d=200) concluída!
+Comparações de chave: 9676739
+Tempo de inserção: 15703 ms
+
+=========================================================
+ [S1] Busca por Total de Casos em uma cidade
+
+
+Código da Cidade: 330455
+Total de Casos: 17793483
+Tempo de Busca: 1319 ms 
+
+Código da Cidade: 530010
+Total de Casos: 27763656
+Tempo de Busca: 1910 ms 
+
+Código da Cidade: 355030
+Total de Casos: 46957380
+Tempo de Busca: 1495 ms 
+
+Código da Cidade: 310620
+Total de Casos: 5916456
+Tempo de Busca: 1400 ms 
+
+Código da Cidade: 410690
+Total de Casos: 5014999
+Tempo de Busca: 1678 ms 
+
+=========================================================
+ [S2] Busca por Total de Casos em um intervalo de coordenadas
+
+Intervalo escolhido: [(-25 , -50),(-15 , -40)]

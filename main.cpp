@@ -369,6 +369,7 @@ int main(int argc, char *argv[])
     cout << "Lendo arquivo brazil_covid19_cities_processado.csv..." << endl;
     leituraDeCasos(argv[1], tabela, 0, &hash);
     cout << "Leitura concluída!" << endl;
+    tabela->imprime();
 
     // Selecionar N conjuntos aleatórios da tabela e adicionar na estrutura
     int valoresDeN[5] = {10000, 50000, 100000, 500000, 1000000};
@@ -386,6 +387,9 @@ int main(int argc, char *argv[])
         int tempoB20 = 0;
         int comparacoesB200 = 0;
         int tempoB200 = 0;
+
+        int tempoBuscaS1 = 0;
+        int tempoBuscaS2 = 0;
 
         for (int m = 0; m < 5; m++)
         {
@@ -440,8 +444,6 @@ int main(int argc, char *argv[])
             cout << "Inserindo na Arvore B (d=20) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
             arq << "Inserindo na Arvore B (d=20) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
 
-            delete[] auxAVL;
-
             i = 0;
             int *auxB20 = new int[valoresDeN[n]]();
 
@@ -470,8 +472,6 @@ int main(int argc, char *argv[])
             arq << "Comparações de chave: " << arvB20->getComparacoes() << endl;
             arq << "Tempo de inserção: " << durationInsertB20.count() << " ms" << endl;
             arq << endl;
-
-            delete[] auxB20;
 
             cout << "Inserindo na Arvore B (d=200) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
             arq << "Inserindo na Arvore B (d=200) - quantidade de registros: " << valoresDeN[n] << " M = " << m << endl;
@@ -505,6 +505,73 @@ int main(int argc, char *argv[])
             arq << "Tempo de inserção: " << durationInsertB200.count() << " ms" << endl;
             arq << endl;
 
+            // Teste para relatório
+            // Código de algumas cidades para busca
+            // 330455 - Rio de Janeiro
+            // 530010 - Brasília
+            // 355030 - São Paulo
+            // 310620 - Belo Horizonte
+            // 410690 - Curitiba
+            arq << "=========================================================" << endl;
+            arq << " [S1] Busca por Total de Casos em uma cidade" << endl
+                << endl;
+            int codigos[5] = {330455, 530010, 355030, 310620, 410690};
+
+            for (int i = 0; i < 5; i++)
+            {
+                auto startTotalCasos = high_resolution_clock::now(); //Inicia contador de tempo
+
+                int total = tabela->totalDeCasos(codigos[i]);
+                auto stopTotalCasos = high_resolution_clock::now(); //Termina de contar o tempo
+                auto durationTotalCasos = duration_cast<milliseconds>(stopTotalCasos - startTotalCasos);
+
+                arq << endl
+                    << "Código da Cidade: " << codigos[i];
+                arq << endl
+                    << "Total de Casos: " << total << endl;
+                arq << "Tempo de Busca: " << durationTotalCasos.count() << " ms " << endl;
+
+                tempoBuscaS1 += durationTotalCasos.count();
+            }
+
+            // Intervalos de Busca por região
+            // [(-25, -50), (-15, -40)]
+            // [(-10, -60), (-5, -50)]
+            int coordenadas[8] = {-25, -50, -15, -40, -10, -60, -5, -50};
+            arq << endl
+                << "=========================================================" << endl;
+
+            arq << " [S2] Busca por Total de Casos em um intervalo de coordenadas" << endl;
+
+            for (int i = 0; i < 2; i++)
+            {
+
+                arq << endl
+                    << "Intervalo escolhido: "
+                    << "[(" << coordenadas[i * 4] << " , " << coordenadas[(i + 1) + (i * 3)] << "),(" << coordenadas[(i + 2) + (i * 3)] << " , " << coordenadas[(i + 3) + (i * 3)] << ")]" << endl;
+
+                auto startTotalCasosRegiao = high_resolution_clock::now(); //Inicia contador de tempo
+
+                vector<Cidade *> cidades = quadTree->buscaRange(coordenadas[(i * 4)], coordenadas[(i + 1) + (i * 3)], coordenadas[(i + 2) + (i * 3)], coordenadas[(i + 3) + (i * 3)]);
+                int total = 0;
+
+                for (int i = 0; i < cidades.size(); i++)
+                {
+                    // cout<< cidades[i]->getNomeCidade() << endl;
+                    int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
+                    // cout << "Total de casos: " << casos << endl;
+                    total += casos;
+                }
+                auto stopTotalCasosRegiao = high_resolution_clock::now(); //Termina de contar o tempo
+                auto durationTotalCasosRegiao = duration_cast<milliseconds>(stopTotalCasosRegiao - startTotalCasosRegiao);
+
+                arq << "Total de casos na região: " << total << endl;
+                arq << "Tempo de Busca: " << durationTotalCasosRegiao.count() << " ms " << endl;
+
+                tempoBuscaS2 += durationTotalCasosRegiao.count();
+            }
+            delete[] auxAVL;
+            delete[] auxB20;
             delete[] auxB200;
         }
         arq << "=======================================================" << endl;
@@ -519,71 +586,17 @@ int main(int argc, char *argv[])
         arq << "Arvore B (d-200)" << endl;
         arq << "Media de comprações de chave: " << comparacoesB200 / 5 << endl;
         arq << "Media de tempo de inserçãõ: " << tempoB200 / 5 << endl;
+        arq << "=======================================================" << endl;
+        arq << "[S1]" << endl;
+        arq << "Media de tempo de Busca: " << tempoBuscaS1 / 25 << " ms " << endl;
+        arq << "=======================================================" << endl;
+        arq << "[S2]" << endl;
+        arq << "Media de tempo de Busca: " << tempoBuscaS2 / 10 << " ms " << endl;
     }
 
-    // Teste para relatório
-    // Código de algumas cidades para busca
-    // 330455 - Rio de Janeiro
-    // 530010 - Brasília
-    // 355030 - São Paulo
-    // 310620 - Belo Horizonte
-    // 410690 - Curitiba
-    arq << "=========================================================" << endl;
-    arq << " [S1] Busca por Total de Casos em uma cidade" << endl
-        << endl;
-    int codigos[5] = {330455, 530010, 355030, 310620, 410690};
+    
 
-    for (int i = 0; i < 5; i++)
-    {
-        auto startTotalCasos = high_resolution_clock::now(); //Inicia contador de tempo
-
-        int total = tabela->totalDeCasos(codigos[i]);
-        auto stopTotalCasos = high_resolution_clock::now(); //Termina de contar o tempo
-        auto durationTotalCasos = duration_cast<milliseconds>(stopTotalCasos - startTotalCasos);
-
-        arq << endl
-            << "Código da Cidade: " << codigos[i];
-        arq << endl
-            << "Total de Casos: " << total << endl;
-        arq << "Tempo de Busca: " << durationTotalCasos.count() << " ms " << endl;
-    }
-
-    // Intervalos de Busca por região
-    // [(-25, -50), (-15, -40)]
-    // [(-10, -60), (-5, -50)]
-    int coordenadas[8] = {-25, -50, -15, -40, -10, -60, -5, -50};
-    arq << endl << "=========================================================" << endl;
-
-    arq << " [S2] Busca por Total de Casos em um intervalo de coordenadas" << endl;
-
-    for (int i = 0; i < 2; i++)
-    {
-
-        
-        arq << endl
-            << "Intervalo escolhido: "
-            << "[(" << coordenadas[i * 4] << " , " << coordenadas[(i + 1) + (i * 3)] << "),(" << coordenadas[(i + 2) + (i * 3)] << " , " << coordenadas[(i + 3) + (i * 3)] << ")]" << endl;
-
-        auto startTotalCasosRegiao = high_resolution_clock::now(); //Inicia contador de tempo
-
-        vector<Cidade *> cidades = quadTree->buscaRange(coordenadas[(i * 4)], coordenadas[(i + 1) + (i * 3)], coordenadas[(i + 2) + (i * 3)], coordenadas[(i + 3) + (i * 3)]);
-        int total = 0;
-
-        for (int i = 0; i < cidades.size(); i++)
-        {
-            // cout<< cidades[i]->getNomeCidade() << endl;
-            int casos = tabela->totalDeCasos(cidades[i]->getCodCidade());
-            // cout << "Total de casos: " << casos << endl;
-            total += casos;
-        }
-        auto stopTotalCasosRegiao = high_resolution_clock::now(); //Termina de contar o tempo
-        auto durationTotalCasosRegiao = duration_cast<milliseconds>(stopTotalCasosRegiao - startTotalCasosRegiao);
-
-        arq << "Total de casos na região: " << total << endl;
-        arq << "Tempo de Busca: " << durationTotalCasosRegiao.count() << " ms " << endl;
-    }
-
-    int opcao = 3;
+    int opcao = 0;
 
     while (opcao != 3)
     {
@@ -660,7 +673,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    opcao = 5;
+    opcao = 0;
 
     while (opcao != 5)
     {
